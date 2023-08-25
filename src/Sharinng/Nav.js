@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { BookOpenIcon, Bars3BottomRightIcon, XMarkIcon } from '@heroicons/react/24/solid'
 
+
 const Nav = () => {
     let Links =[
-        {name:"Home",link:"/Home"},
+        {name:"HOME",link:"/Home"},
         {name:"SERVICE",link:"/"},
         {name:"ABOUT",link:"/"},
         {name:"CONTACT",link:"/"},
@@ -15,8 +16,9 @@ const Nav = () => {
            <div className='md:flex items-center justify-between bg-white py-4 md:px-10 px-7'>
             {/* logo section */}
             <div className='font-bold text-2xl cursor-pointer flex items-center gap-1'>
+                <img src='../asserst/WhatsApp Image 2023-08-25 at 10.46.58 PM.jpeg'></img>
                 <BookOpenIcon className='w-7 h-7 text-blue-600'/>
-                <span>Inscribe</span>
+                <span>আমার চোখ</span>
             </div>
             {/* Menu icon */}
             <div onClick={()=>setOpen(!open)} className='absolute right-8 top-6 cursor-pointer md:hidden w-7 h-7'>
