@@ -16,7 +16,7 @@ const Nav = () => {
            <div className='md:flex items-center justify-between bg-white py-4 md:px-10 px-7'>
             {/* logo section */}
             <div className='font-bold text-2xl cursor-pointer flex items-center gap-1'>
-                <img src='../asserst/WhatsApp Image 2023-08-25 at 10.46.58 PM.jpeg'></img>
+                <img src='../asserst/WhatsApp Image 2023-08-25 at 10.46.58 PM.jpeg' alt=''></img>
                 <BookOpenIcon className='w-7 h-7 text-blue-600'/>
                 <span>আমার চোখ</span>
             </div>

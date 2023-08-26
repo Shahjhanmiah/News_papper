@@ -3,7 +3,7 @@ import Hero from '../components/hero_section/Hero';
 
 const Home = () => {
     return (
-        <div>
+        <div className='w-[80%] m-auto'>
             <Hero />
         </div>
     );
