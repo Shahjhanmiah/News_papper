@@ -2,10 +2,8 @@ import React from 'react'
 import { news } from './news.js'
 
 
-const Hero = () => {
+const Hero = ({BigImage,subtitle,allnews}) => {
 
-    const BigImage = news[0]
-    const headingSubtitle = BigImage.desc.substring(0, 100) + '[...]'
 
 
     return (
@@ -21,7 +19,7 @@ const Hero = () => {
                 <div className='bg-black w-[100%]  h-30 px-2 text-white  relative bottom-28  flex flex-col items-center justify-center group-hover:opacity-100 transition-opacity ease-in-out duration-300  bg-opacity-50 '>
 
                     <h1 className='text-2xl  w-full hover:text-[#1f67ad] cursor-pointer' >{BigImage.title}</h1>
-                    <p className='text-sm hidden md:block '>{headingSubtitle}</p>
+                    <p className='text-sm hidden md:block '>{subtitle}</p>
                 </div>
 
 
@@ -30,7 +28,7 @@ const Hero = () => {
 
             <div className="list-side w-full lg:w-1/2 ml-4 mt-0">
                 {
-                    news.slice(1,6).map(item => {
+                    allnews.slice(1,6).map(item => {
                         return <div key={item.id} className='flex items-center justify-between pb-4 border-b'>
                             <h1 className='hover:text-[#1f67ad] cursor-pointer'>{item.title}</h1>
                             <img className='w-12 h-12' src={item.Img} alt="" />
