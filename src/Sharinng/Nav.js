@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { BookOpenIcon, Bars3BottomRightIcon, XMarkIcon } from '@heroicons/react/24/solid'
-<script src="https://kit.fontawesome.com/8489606c5b.js" crossorigin="anonymous"></script>
-
+import logo from '../asserst/WhatsApp Image 2023-08-25 at 10.46.58 PM.jpeg'
 const Nav = () => {
     let Links =[
         {name:"HOME",link:"/Home"},
@@ -19,9 +18,7 @@ const Nav = () => {
            <div className='md:flex items-center justify-between bg-white py-4 md:px-10 px-7'>
             {/* logo section */}
             <div className='font-bold text-2xl cursor-pointer flex items-center gap-1'>
-                {/* <img src='../asserst/WhatsApp Image 2023-08-25 at 10.46.58 PM.jpeg'></img> */}
-                <BookOpenIcon className='w-7 h-7 text-blue-600'/>
-                <span>আমার চোখ</span>
+                <img src={logo} alt='' className='object-cover w-28 h-12'></img>
             </div>
             {/* Menu icon */}
             <div onClick={()=>setOpen(!open)} className='absolute right-8 top-6 cursor-pointer md:hidden w-7 h-7'>

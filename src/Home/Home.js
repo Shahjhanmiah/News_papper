@@ -1,9 +1,12 @@
 import React from 'react';
+import Hero from '../components/hero_section/Hero';
+import Allnews from '../components/AllNews/Allnews';
 
 const Home = () => {
     return (
-        <div>
-            <h1>Hellow</h1>
+        <div className='w-[80%] m-auto'>
+            <Hero />
+            <Allnews />
         </div>
     );
 };
