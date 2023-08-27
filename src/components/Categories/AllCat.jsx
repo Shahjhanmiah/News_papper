@@ -21,7 +21,7 @@ const AllCat = () => {
     // console.log(national)
   
   return (
-    <div className='grid grid-cols-1 lg:grid-cols-3'>
+    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
         <SingleCat BigImage={FirstNationNews} subtitle={FirstNationalsubtitle} allnews={national} />
         <SingleCat allnews={international} BigImage={FirstinternationalNews} subtitle={FirstInternationalSubtitle}/>
         <SingleCat allnews={AllCountry} BigImage={FirstAllCountryNews} subtitle={FirstAllCountrySubtitle}/>

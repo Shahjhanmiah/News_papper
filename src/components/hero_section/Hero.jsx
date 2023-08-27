@@ -14,9 +14,9 @@ const Hero = ({BigImage,subtitle,allnews}) => {
                     <span className='px-2 bg-black text-white'>জাতীয়</span>
                 </div>
 
-                <img src={BigImage.Img} className='object-cover w-full h-full' alt='' />
+                <img src={BigImage.Img} className='object-cover w-full h-full cursor-pointer' alt='' />
 
-                <div className='bg-black w-[100%]  h-30 px-2 text-white  relative bottom-28  flex flex-col items-center justify-center group-hover:opacity-100 transition-opacity ease-in-out duration-300  bg-opacity-50 '>
+                <div className=' w-[100%]  h-30 px-2 text-white  relative bottom-28  flex flex-col items-center justify-center group-hover:opacity-100 transition-opacity ease-in-out duration-300  bg-opacity-50 '>
 
                     <h1 className='text-2xl  w-full hover:text-[#1f67ad] cursor-pointer' >{BigImage.title}</h1>
                     <p className='text-sm hidden md:block '>{subtitle}</p>
@@ -31,7 +31,7 @@ const Hero = ({BigImage,subtitle,allnews}) => {
                     allnews.slice(1,6).map(item => {
                         return <div key={item.id} className='flex items-center justify-between pb-4 border-b'>
                             <h1 className='hover:text-[#1f67ad] cursor-pointer'>{item.title}</h1>
-                            <img className='w-12 h-12' src={item.Img} alt="" />
+                            <img className='w-12 h-12 cursor-pointer' src={item.Img} alt=""  />
 
                         </div>
                     })
