@@ -5,6 +5,7 @@ import BannerAd from '../components/Ads_sections/BannerAd';
 import SingleCat from '../components/Categories/SingleCat';
 import { news } from '../components/hero_section/news';
 import AllCat from '../components/Categories/AllCat';
+import Social from '../components/Ads_sections/Social_media/Social_media';
 
 const Home = () => {
     
@@ -17,9 +18,11 @@ const Home = () => {
             <Hero BigImage={BigImage} subtitle={headingSubtitle} allnews={news}/>
             <Allnews />
             <BannerAd />
-            <AllCat />
-        </div>
+            <AllCat /> 
+           <Social/>
+
+          </div>
     );
 };
 
-export default Home;
+export default Home;       
