@@ -4,14 +4,14 @@ import logo from '../asserst/WhatsApp Image 2023-08-25 at 10.46.58 PM.jpeg'
 const Nav = () => {
     let Links =[
         {name:"HOME",link:"/Home"},
-        {name:"SERVICE",link:"/"},
+        {name:"INTERNATIONAL",link:"/International"},
         {name:"ABOUT",link:"/"},
         {name:"CONTACT",link:"/"},
         <i class="fa-brands fa-square-facebook"></i>
 
         
       ];
-      let [open, setOpen] =useState(false);
+      let [open, setOpen] =useState(false); 
 
     return (
         <div className='shadow-md w-full fixed top-0 left-0'>
@@ -43,4 +43,4 @@ const Nav = () => {
     );
 };
 
-export default Nav;
+export default Nav;      
