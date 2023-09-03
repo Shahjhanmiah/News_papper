@@ -3,6 +3,11 @@ import Home from "../Home/Home";
 import Main from "../Sharinng/Main/Main";
 import Hero from "../components/hero_section/Hero";
 import International from "../components/International/International_Section";
+import National from "../components/National/National";
+import National_Section from "../components/National/National_Section";
+import Playing from "../components/Playing/Playing";
+import Playing_Section from "../components/Playing/Playing_Section";
+import Entertainment_Section from "../components/Entertainment/Entertainment_Section";
 
 export const router = createBrowserRouter([
     {
@@ -17,7 +22,20 @@ export const router = createBrowserRouter([
             path:'/international',
             element:<International></International>        
           },
+          {
+            path:'/National',
+            element:<National_Section></National_Section>    
+          },
+          {
+            path:'/Playing',
+            element:<Playing_Section></Playing_Section>
+          },
+          {
+            path:'/Entertainment',
+            element:<Entertainment_Section></Entertainment_Section>
+          },
           
+        
 
           
         ]

@@ -7,6 +7,8 @@ import { news } from '../components/hero_section/news';
 import AllCat from '../components/Categories/AllCat';
 import Social from '../components/SocialMedia/Social';
 import International from '../components/International/International_Section';
+import National_Section from '../components/National/National_Section';
+import National from '../components/National/National';
 
 const Home = () => {
     
@@ -21,7 +23,8 @@ const Home = () => {
             <BannerAd />
             <AllCat />
             <Social></Social>
-            <International></International>  
+           <National_Section></National_Section>
+            
             
            
 

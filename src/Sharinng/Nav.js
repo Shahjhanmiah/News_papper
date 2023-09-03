@@ -5,8 +5,9 @@ const Nav = () => {
     let Links =[
         {name:"HOME",link:"/Home"},
         {name:"INTERNATIONAL",link:"/International"},
-        {name:"ABOUT",link:"/"},
-        {name:"CONTACT",link:"/"},
+        {name:"NATIONAL",link:"/National"},
+        {name:"PLAYING",link:"/Playing"},
+        {name:"Entertainment",link:"/Entertainment"},
         <i class="fa-brands fa-square-facebook"></i>
 
         
