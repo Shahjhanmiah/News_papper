@@ -8,6 +8,9 @@ const Nav = () => {
         {name:"NATIONAL",link:"/National"},
         {name:"PLAYING",link:"/Playing"},
         {name:"Entertainment",link:"/Entertainment"},
+        {name:"Campas",link:"/Compas"},
+        {name:"AllCountry",link:"/AllCountry"},
+        {name:"Viodeo",link:"/Viodeo"},
         <i class="fa-brands fa-square-facebook"></i>
 
         
