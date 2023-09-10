@@ -6,8 +6,8 @@ import { base_url } from '../../../base_url/Base_url';
 
 const Allnews = () => {
 
-    const [category , setCategory] = useState([])
-    const {posts,setPosts}= useContext(MainContext)
+    const [category, setCategory] = useState([])
+    const { posts, setPosts } = useContext(MainContext)
     // const [posts,setPosts]= useState([])
     const params = useParams()
 
@@ -15,26 +15,52 @@ const Allnews = () => {
         getAllPosts();
     }, [params])
 
-    const getAllPosts = async() => {
+    console.log(category)
 
-      await  axios.get(`${base_url}/getposts`).then(res => {
-        setCategory(res.data.filter(post => post?.category === params.id))
-      }).catch(err => console.log(err));
+    const getAllPosts = async () => {
+
+        await axios.get(`${base_url}/getposts`).then(res => {
+            setCategory(res.data.filter(post => post?.category === params.id))
+        }).catch(err => console.log(err));
 
     }
+
+
+
+
+    return (
+        <div>
+            {category.length ? <div className=' w-[90%] m-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-3    
+                text-start mt-[100px]'>
+                     {category?.map(item => {
+                        return <div className='' key={item?._id}>
+                            <Link to={`/post/${item._id}`}><img src={item?.content?.img} alt="news" className='w-full py-2 cursor-pointer sm:h-40' /></Link>
+                            <Link to={`/post/${item._id}`}><h1 className='font-bold hover:text-[#1f67ad] cursor-pointer text-base'>{item.title}</h1></Link>
+                        </div>
+                    })
+
+                }
+                   
+                </div>
+
+                : <div className='w-full  grid lg:grid-cols-3 gap-3 mt-[100px]'>
+                    {
+                        posts.slice(1, 8).map(post => {
+                            return <div className='' key={post?._id}>
+                                <Link to={`/post/${post._id}`}><img src={post?.content?.img} alt="news" className='w-full py-2 cursor-pointer sm:h-40' /></Link>
+                                <Link to={`/post/${post?._id}`}><h1 className='font-bold hover:text-[#1f67ad] cursor-pointer text-base'>{post?.title}</h1></Link>
+                            </div>
+                        })
+                    }
+                </div>
+            }
+        </div>
+    
 
   
 
 
-    return (
-        <div className=' w-[90%] m-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-3  text-start mt-[100px]'>
-            {category?.map(item => {
-                return <div className='' key={item?._id}> 
-                <Link to={`/post/${item._id}`}><img src={item?.content?.img} alt="news" className='w-full py-2 cursor-pointer sm:h-40' /></Link>
-                 <Link to={`/post/${item._id}`}><h1 className='font-bold hover:text-[#1f67ad] cursor-pointer text-base'>{item.title}</h1></Link>
-                </div>
-            })}
-        </div>
+
     )
 }
 

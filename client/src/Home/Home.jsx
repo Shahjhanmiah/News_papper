@@ -36,7 +36,7 @@ const Home = () => {
         <div className='w-[90%] m-auto flex-col flex gap-3'>
             <Hero BigImage={latestPost} subtitle={headingSubtitle} allnews={posts} />
 
-            <Allnews news={posts} />
+            <Allnews  />
             <BannerAd />
             <AllCat news={posts}/>
             <Social news={posts}/>
