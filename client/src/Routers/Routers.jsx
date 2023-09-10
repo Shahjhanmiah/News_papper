@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Home from "../Home/Home";
 import Main from "../Sharinng/Main/Main";
 import Allnews from "../components/AllNews/Allnews";
+import PostPage from "../components/PostPage/PostPage";
 // import Hero from "../components/hero_section/Hero";
 // import International from "../components/International/International_Section";
 // import National_Section from "../components/National/National_Section";
@@ -24,6 +25,10 @@ export const router = createBrowserRouter([
           {
             path:'/category/:id',
             element:<Allnews></Allnews>
+          },
+          {
+            path:'/post',
+            element:<PostPage></PostPage>,
           },
           // {
           //   path:'/National',

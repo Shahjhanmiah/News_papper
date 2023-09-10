@@ -3,13 +3,13 @@ import Hero from '../components/hero_section/Hero';
 import Allnews from '../components/AllNews/Allnews';
 import BannerAd from '../components/Ads_sections/BannerAd';
 import AllCat from '../components/Categories/AllCat';
-import Social from '../components/SocialMedia/Social';
-import National_Section from '../components/National/National_Section';
 import { base_url } from '../../base_url/Base_url';
 import { MainContext } from '../components/context/PostContext';
 
 // third party libraries
 import axios from 'axios'
+import Social from '../components/social/Social';
+import National from '../components/national/National';
 
 
 const Home = () => {
@@ -40,7 +40,7 @@ const Home = () => {
             <BannerAd />
             <AllCat news={posts}/>
             <Social news={posts}/>
-            <National_Section news={posts} />
+            <National news={posts} />
 
 
 
