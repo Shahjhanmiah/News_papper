@@ -1,9 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { MainContext } from '../context/PostContext';
 
 const National = () => {
     const {posts} = useContext(MainContext)
-    console.log({posts})
+    
+    useEffect(() => {
+        console.log({posts})
+},)
+
+
+
     const national = posts.filter(item => item?.category === 'national' )
     // const nationalPosts = posts.filter(post => post?.category === 'national');
     

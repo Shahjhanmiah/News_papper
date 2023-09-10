@@ -27,7 +27,7 @@ export const router = createBrowserRouter([
             element:<Allnews></Allnews>
           },
           {
-            path:'/post',
+            path:'/post/:id',
             element:<PostPage></PostPage>,
           },
           // {

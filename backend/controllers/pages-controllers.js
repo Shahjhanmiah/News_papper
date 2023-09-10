@@ -30,5 +30,20 @@ export const getPosts = async (req, res) => {
   }
 };
 
+export const getSinglePost = async (req, res) => {
+const {id} = req.params;
+
+    try {
+    const post = await BlogModel.find({_id:id}).sort({updatedAt:-1})
+    // const newPost = await new BlogModel({ title, content, tags, category });
+    // const post = await newPost.save();
+    console.log(post)
+    return res.status(201).json(post);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "error adding post" });
+  }
+};
+
 
 
