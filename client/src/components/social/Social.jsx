@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import { MainContext } from '../context/PostContext';
+import { Link } from 'react-router-dom';
 
 const Social = () => {
      const {posts} = useContext(MainContext)
@@ -11,7 +12,7 @@ const Social = () => {
         <>
         <div className=' w-full flex-auto border-b my-2 '>
              <div className=' flex heading justify-between '>
-                <h1 className='font-bold hover:text-[#1f67ad] cursor-pointer text-base '>{social[0]?.category}</h1> 
+                <Link ><h1 className='font-bold hover:text-[#1f67ad] cursor-pointer text-base '>{social[0]?.category}</h1> </Link>
                 <h1 className='  font-bold  hover:text-[#1f67ad] cursor-pointer text-base'>আরও... </h1>
              </div> 
 

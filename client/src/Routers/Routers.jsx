@@ -3,6 +3,7 @@ import Home from "../Home/Home";
 import Main from "../Sharinng/Main/Main";
 import Allnews from "../components/AllNews/Allnews";
 import PostPage from "../components/PostPage/PostPage";
+import Dashboard from "../components/admin/Dashboard/Dashboard";
 // import Hero from "../components/hero_section/Hero";
 // import International from "../components/International/International_Section";
 // import National_Section from "../components/National/National_Section";
@@ -30,31 +31,10 @@ export const router = createBrowserRouter([
             path:'/post/:id',
             element:<PostPage></PostPage>,
           },
-          // {
-          //   path:'/National',
-          //   element:<National_Section></National_Section>    
-          // },
-          // {
-          //   path:'/Playing',
-          //   element:<Playing_Section></Playing_Section>
-          // },
-          // {
-          //   path:'/Entertainment',
-          //   element:<Entertainment_Section></Entertainment_Section>
-          // },
-          // {
-          //   path:'/Compas',
-          //   element:<Campas_Section></Campas_Section>
-          // },
-          // {
-          //   path:'/AllCountry',
-          //   element:<AllCountry_Section></AllCountry_Section>
-          // },
-          // {
-          //   path:'/Viodeo',
-          //   element:<Viodeo_Section></Viodeo_Section>
-          // },
-          
+          {
+           path:'/dashboard',
+           element:<Dashboard></Dashboard> 
+          }
         
 
           

@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Hero from '../components/hero_section/Hero';
 import Allnews from '../components/AllNews/Allnews';
-import BannerAd from '../components/Ads_sections/BannerAd';
 import AllCat from '../components/Categories/AllCat';
 import { base_url } from '../../base_url/Base_url';
 import { MainContext } from '../components/context/PostContext';
+import BannerAd from '../components/Ads_sections/BannerAd'
+
 
 // third party libraries
 import axios from 'axios'
@@ -33,15 +34,14 @@ const Home = () => {
     }
 
     return (
-        <div className='w-[90%] m-auto flex-col flex gap-3'>
+        <div className=' m-auto flex-col flex gap-3'>
             <Hero BigImage={latestPost} subtitle={headingSubtitle} allnews={posts} />
 
-            <Allnews  />
-            <BannerAd />
+            <BannerAd/>
             <AllCat news={posts}/>
             <Social news={posts}/>
             <National news={posts} />
-
+            <Allnews  />
 
 
 

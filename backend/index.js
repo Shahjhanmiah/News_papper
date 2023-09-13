@@ -7,6 +7,7 @@ import connection from './database/connection.js';
 dotenv.config();
 
 
+
 const app = express();
 app.use(cors({origin: true, credentials: true}))
 app.options('*', cors({origin: true, credentials: true}))
