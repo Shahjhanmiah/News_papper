@@ -1,23 +1,22 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import SingleCat from './SingleCat'
-import { news } from '../hero_section/news'
+import { MainContext } from '../context/PostContext';
 
-const AllCat = () => {
+const AllCat = ({news}) => {
 
-
- 
+const {posts} = useContext(MainContext)
   
-    const national = news.filter(item => item.category === 'জাতীয়' )
+    const national = posts.filter(item => item.category === 'national' )
     const FirstNationNews = national[0];
-    const FirstNationalsubtitle = FirstNationNews.desc.substring(1,100)
+    const FirstNationalsubtitle = FirstNationNews?.content?.desc.substring(1,100)
 
-    const international = news.filter(item => item.category === 'আন্তর্জাতিক' )
+    const international = posts.filter(item => item.category === 'international' )
     const FirstinternationalNews = international[0];
-    const FirstInternationalSubtitle = FirstinternationalNews.desc.substring(1,100)
+    const FirstInternationalSubtitle = FirstinternationalNews?.content?.desc.substring(1,100)
 
-    const AllCountry = news.filter(item => item.category === 'সারাদেশ' )
+    const AllCountry = posts.filter(item => item.category === 'entertainment' )
     const FirstAllCountryNews = AllCountry[0];
-    const FirstAllCountrySubtitle = FirstAllCountryNews.desc.substring(1,100)
+    const FirstAllCountrySubtitle = FirstAllCountryNews?.content?.desc.substring(1,100)
     // console.log(national)
   
   return (

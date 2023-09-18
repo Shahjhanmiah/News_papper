@@ -1,14 +1,20 @@
 import { createBrowserRouter } from "react-router-dom";
 import Home from "../Home/Home";
 import Main from "../Sharinng/Main/Main";
-import Hero from "../components/hero_section/Hero";
-import International from "../components/International/International_Section";
-import National_Section from "../components/National/National_Section";
-import Playing_Section from "../components/Playing/Playing_Section";
-import Entertainment_Section from "../components/Entertainment/Entertainment_Section";
-import Campas_Section from "../components/Campas/Campas_Section";
-import AllCountry_Section from "../components/All_Country/AllCountry_Section";
-import Viodeo_Section from "../components/Viodeo/Viodeo_Section";
+import Allnews from "../components/AllNews/Allnews";
+import PostPage from "../components/PostPage/PostPage";
+import Dashboard from "../components/admin/Dashboard/Dashboard";
+import Register from "../components/Register/Register";
+import Login from "../components/Login/Login";
+// import Hero from "../components/hero_section/Hero";
+// import International from "../components/International/International_Section";
+// import National_Section from "../components/National/National_Section";
+// import Playing_Section from "../components/Playing/Playing_Section";
+// import Entertainment_Section from "../components/Entertainment/Entertainment_Section";
+// import Campas_Section from "../components/Campas/Campas_Section";
+// import AllCountry_Section from "../components/All_Country/AllCountry_Section";
+// import Viodeo_Section from "../components/Viodeo/Viodeo_Section";
+// import AllCat from "../components/Categories/AllCat";
 
 export const router = createBrowserRouter([
     {
@@ -16,38 +22,31 @@ export const router = createBrowserRouter([
         element: <Main></Main>,
         children:[
           {
-            path:'/Home',
+            path:'/',
             element:<Home></Home>,
           },
           {
-            path:'/international',
-            element:<International></International>        
+            path:'/category/:id',
+            element:<Allnews></Allnews>
           },
           {
-            path:'/National',
-            element:<National_Section></National_Section>    
+            path:'/signup',
+            element:<Register></Register>
+
           },
           {
-            path:'/Playing',
-            element:<Playing_Section></Playing_Section>
+            path:'/login',
+            element:<Login></Login>
+
           },
           {
-            path:'/Entertainment',
-            element:<Entertainment_Section></Entertainment_Section>
+            path:'/post/:id',
+            element:<PostPage></PostPage>,
           },
           {
-            path:'/Compas',
-            element:<Campas_Section></Campas_Section>
-          },
-          {
-            path:'/AllCountry',
-            element:<AllCountry_Section></AllCountry_Section>
-          },
-          {
-            path:'/Viodeo',
-            element:<Viodeo_Section></Viodeo_Section>
-          },
-          
+           path:'/dashboard',
+           element:<Dashboard></Dashboard> 
+          }
         
 
           
