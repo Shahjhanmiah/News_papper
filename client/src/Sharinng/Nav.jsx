@@ -10,6 +10,7 @@ import { FaArrowRight, } from 'react-icons/fa';
 
 const Nav = () => {
     const { user} = useContext(AuthContext)
+    
 
 const {posts} = useContext(MainContext)
 
