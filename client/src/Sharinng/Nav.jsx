@@ -1,10 +1,15 @@
-import React, { useContext, useState } from 'react';
+
 import {Bars3BottomRightIcon, XMarkIcon } from '@heroicons/react/24/solid'
-import logo from '../assets/WhatsApp Image 2023-08-25 at 10.46.58 PM.jpeg'
+import logo from '../components/Categories/assets/WhatsApp Image 2023-08-25 at 10.46.58 PM.jpeg'
 import { Link } from 'react-router-dom';
 import { MainContext } from '../components/context/PostContext';
+import { useContext, useState} from 'react';
+import { AuthContext } from '../components/ContextFile/AuthProvider';
+import { FaArrowRight, } from 'react-icons/fa';
+
 
 const Nav = () => {
+    const { user} = useContext(AuthContext)
 
 const {posts} = useContext(MainContext)
 
@@ -48,7 +53,17 @@ const {posts} = useContext(MainContext)
                         <Link to={`/category/${link.link}`} className='text-gray-800 hover:text-blue-400 duration-500'>{link.name}</Link>
                     </li>))
                 }
-                <button className='btn bg-blue-600 text-white md:ml-8 font-semibold px-3 py-1 rounded duration-500 md:static'>Get Started</button>
+               <Link to={'/signup'}>
+               <button className='btn bg-blue-600 text-white md:ml-8 font-semibold px-3 py-1 rounded duration-500 md:static'>Get Started</button>
+               </Link>
+               <li>
+               <Link to="/profile">
+                                    {user?.photoURL ?
+                                        <img style={{ height: '45px' }} roundedcircle src={user?.photoURL}></img>
+                                        : <FaArrowRight></FaArrowRight>
+                                    }
+                                </Link>
+               </li>
                
             </ul>
             {/* button */}

@@ -4,6 +4,8 @@ import Main from "../Sharinng/Main/Main";
 import Allnews from "../components/AllNews/Allnews";
 import PostPage from "../components/PostPage/PostPage";
 import Dashboard from "../components/admin/Dashboard/Dashboard";
+import Register from "../components/Register/Register";
+import Login from "../components/Login/Login";
 // import Hero from "../components/hero_section/Hero";
 // import International from "../components/International/International_Section";
 // import National_Section from "../components/National/National_Section";
@@ -26,6 +28,16 @@ export const router = createBrowserRouter([
           {
             path:'/category/:id',
             element:<Allnews></Allnews>
+          },
+          {
+            path:'/signup',
+            element:<Register></Register>
+
+          },
+          {
+            path:'/login',
+            element:<Login></Login>
+
           },
           {
             path:'/post/:id',
