@@ -48,8 +48,8 @@ const Dashboard = () => {
                     </div>
 
                       <div className='bg-white p-5'>
-                        <h1 className='text-3xl font-bold mb-[50px]'> Social Visitors </h1>
-                        <Social_visitors/>
+                        <h1 className='text-3xl font-bold mb-[50px]'>  Section </h1>
+                        {/* <Social_visitors/> */}
                       </div>
               </div>                   
          </div>
