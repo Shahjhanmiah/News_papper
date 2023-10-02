@@ -12,15 +12,23 @@ import Swal from 'sweetalert2'
 const Nav = () => {
 
 
-    const { posts, account,setAccount } = useContext(MainContext)
+    const { account,setAccount } = useContext(MainContext)
     const [isUserHaveProfile, setIsUserHaveProfile] = useState(false)
     const ProfileText = account?.name?.charAt(0)
 
     const navigate = useNavigate()
    
     useEffect(() => {
-        
-    }, [])
+        isHaveAccount();
+    }, [account])
+    
+    const isHaveAccount = () => {
+        if(Object.keys(account).length == 0){
+            setIsUserHaveProfile(false)
+        }else{
+            setIsUserHaveProfile(true)
+        }
+    }
     
 
     const [isDropDownOpen , setIsDropDownOpen] = useState(false)
@@ -102,7 +110,7 @@ await axios.get(`${base_url}/signout`,{withCredentials:true}).then((res) =>{
                                 <Link to={`/category/${link.link}`} className='text-gray-800 hover:text-blue-400 duration-500'>{link.name}</Link>
                             </li>))
                     }
-                    {!account ? <Link to={'/signup'}>
+                    {!isUserHaveProfile ? <Link to={'/signup'}>
                         <button className='btn bg-blue-600 text-white md:ml-8 font-semibold px-3 py-1 rounded duration-500 md:static'>Get Started</button>
                     </Link>
                         : <li>
