@@ -25,7 +25,7 @@ const National = () => {
         </div>
         <div className=' w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 text-start gap-3'>
             {national?.slice(0,4).map(item => {            
-                return <div > 
+                return <div key={item?._id}> 
                 <img src={item?.content?.img} alt="news" className='w-full py-2 cursor-pointer' />
                  <h1 className='font-bold hover:text-[#1f67ad] cursor-pointer text-base'>{item?.title}</h1>
                  <p   >{item?.content?.desc?.slice(0,50)}</p>

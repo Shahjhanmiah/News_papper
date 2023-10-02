@@ -1,39 +1,35 @@
-import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2'
 import logo from '../Categories/assets/Mobile-login.jpg'
 import { AuthContext } from '../ContextFile/AuthProvider';
+import {useFormik} from 'formik'
+import * as Yup from 'yup';
+import { base_url } from '../../../base_url/Base_url';
+import axios from 'axios';
+import { MainContext } from '../context/PostContext';
+
+
+
 const Register = () => {
-    const { createUser } = useContext(AuthContext)
+
+const [passToggle , setPassToggle] = useState(false)
+const [cpassToggle , setCpassToggle] = useState(false)
+const navigate = useNavigate()
+
+
+const {account} = useContext(MainContext);
+
+useEffect(() => {
+    if( Object.keys(account).length !== 0) {
+      navigate('/')
+    }
+  }, [account])
+
+
     const { signGoogle } = useContext(AuthContext)
     const {signGithub}   = useContext(AuthContext)
-    const handleSignUp = event => {
-        event.preventDefault();
-        const form = event.target;
-        const name = form.email.value
-        const email = form.email.value;
-        const password = form.password.value;
 
-        console.log(name, email, password);
-        createUser(email, password)
-            .then(result => {
-                const user = result.user;
-                console.log(user);
-
-                // setAuthToken(user);
-            })
-        Swal.fire({
-            title: 'Success!',
-            text: 'Create User as a Successfully',
-            icon: 'success',
-            confirmButtonText: 'Confirm'
-        })
-
-            .catch(err => console.error(err));
-
-
-
-    }
     // create in google siging 
     const handleGoogleSIgnIn = () => {
         signGoogle()
@@ -58,6 +54,53 @@ const Register = () => {
     }
 
     
+// handling user input registration usign formik
+    const formik = useFormik({
+        initialValues: {
+            name: "",
+            email: "",
+            password: "",
+            cpassword: "",
+        },
+        validationSchema: Yup.object({
+            name: Yup.string().required('Required!').max(30, 'Must be 30 characters or less').min(6, "Too Short!"),
+            email: Yup.string().required('Required!').email("Enter a valid email address"),
+            password: Yup.string().min(6, "Too Short!").max(20, "Too Long!").required('Required!'),
+            cpassword: Yup.string().min(6, "Too Short!").max(20, "Too Long!").required('Required!').oneOf([Yup.ref('password'), null], 'Passwords must match')
+        }),
+        onSubmit: async (values) => {
+            console.log(values)
+            await axios.post(`${base_url}/register`, values).then(res => {
+                if (res.status === 200) {
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Create User as a Successfully',
+                        icon: 'success',
+                        confirmButtonText: 'Confirm'
+                    })
+                    navigate('/signin')
+                }
+
+            }).catch(err => { 
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Something went wrong!',
+                      })
+             });
+        },
+
+    })
+
+
+
+
+
+
+
+
+
+
 
     return (
 
@@ -69,28 +112,52 @@ const Register = () => {
                 </div>
                 <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 py-20">
                     <h1 className="text-5xl text-center font-bold">Sign Up</h1>
-                    <form onSubmit={handleSignUp} className="card-body">
+                    <form onSubmit={formik.handleSubmit} className="card-body">
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Name</span>
                             </label>
-                            <input type="text" name='name' placeholder="Your Name" className="input input-bordered" />
+                            <input type="text" name='name' placeholder="Your Name" className="input input-bordered" onChange={formik.handleChange}/>
+                            {formik.touched.name && formik.errors.name ? (
+                                <div>{formik.errors.name}</div>
+                            ) : null}
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Email</span>
                             </label>
-                            <input type="text" name='email' placeholder="email" className="input input-bordered" required />
+                            <input type="text" name='email' placeholder="email" className="input input-bordered"  onChange={formik.handleChange}/>
+                            {formik.touched.email && formik.errors.email ? (
+                                <div>{formik.errors.email}</div>
+                            ) : null}
                         </div>
-                        <div className="form-control">
+                        <div className="form-control ">
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <input type="password" name='password' placeholder="password" className="input input-bordered" required />
-
+                           <div className='relative'>
+                           <input type={passToggle ? 'text' : 'password'} name='password' placeholder="password" className="input input-bordered w-full"  onChange={formik.handleChange}/>
+                            <span className=' absolute right-0 bottom-0 bg-gray-700 p-3 text-white rounded-md cursor-pointer hover:bg-gray-800 transition-all duration-150' onClick={()=>setPassToggle(!passToggle)}> {passToggle ? 'hide' : 'show'}</span>
+                           </div>
+                            {formik.touched.password && formik.errors.password ? (
+                                <div>{formik.errors.password}</div>
+                            ) : null}
+                        </div>
+                        <div className="form-control relative">
+                            <label className="label">
+                                <span className="label-text">Confirm Password</span>
+                            </label>
+                          <div className='relative'>
+                          <input type={cpassToggle ? 'text' : 'password'} name='cpassword' placeholder="confirm-password" className="input input-bordered w-full"  onChange={formik.handleChange}/>
+                            
+                            <span className=' absolute right-0 bottom-0 bg-gray-700 p-3 text-white rounded-md cursor-pointer hover:bg-gray-800 transition-all duration-150' onClick={()=> setCpassToggle(!cpassToggle)}> {cpassToggle ? "hide" : 'show'}</span>
+                          </div>
+                            {formik.touched.cpassword && formik.errors.cpassword ? (
+                                <div>{formik.errors.cpassword}</div>
+                            ) : null}
                         </div>
                         <div className="form-control mt-6">
-                            <input className="btn btn-primary" type="submit" value="Sign Up" />
+                            <input className="btn bg-blue-600 text-white hover:bg-blue-800 duration-300" type="submit" value="Sign Up" />
                         </div>
                     </form>
                     <div className="flex justify-center space-x-4">
@@ -106,7 +173,7 @@ const Register = () => {
                             </svg>
                         </button>
                     </div>
-                    <p className='text-center'>Already have an account? <Link className='text-orange-600 font-bold' to="/login">Login</Link> </p>
+                    <p className='text-center'>Already have an account? <Link className='text-blue-600 font-bold' to="/signin">Login</Link> </p>
                 </div>
             </div>
         </div>

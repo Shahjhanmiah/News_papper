@@ -13,7 +13,7 @@ const Allnews = () => {
 
     useEffect(() => {
         getAllPosts();
-    }, [params])
+    }, [params.id])
 
     console.log(category)
 

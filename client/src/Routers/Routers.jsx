@@ -6,15 +6,9 @@ import PostPage from "../components/PostPage/PostPage";
 import Dashboard from "../components/admin/Dashboard/Dashboard";
 import Register from "../components/Register/Register";
 import Login from "../components/Login/Login";
-// import Hero from "../components/hero_section/Hero";
-// import International from "../components/International/International_Section";
-// import National_Section from "../components/National/National_Section";
-// import Playing_Section from "../components/Playing/Playing_Section";
-// import Entertainment_Section from "../components/Entertainment/Entertainment_Section";
-// import Campas_Section from "../components/Campas/Campas_Section";
-// import AllCountry_Section from "../components/All_Country/AllCountry_Section";
-// import Viodeo_Section from "../components/Viodeo/Viodeo_Section";
-// import AllCat from "../components/Categories/AllCat";
+import Error from "../components/Error/Error";
+
+
 
 export const router = createBrowserRouter([
     {
@@ -35,7 +29,7 @@ export const router = createBrowserRouter([
 
           },
           {
-            path:'/login',
+            path:'/signin',
             element:<Login></Login>
 
           },
@@ -46,7 +40,12 @@ export const router = createBrowserRouter([
           {
            path:'/dashboard',
            element:<Dashboard></Dashboard> 
-          }
+          },
+        
+          {
+           path:'*',
+           element:<Error></Error> 
+          },
         
 
           
