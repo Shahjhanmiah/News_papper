@@ -42,7 +42,7 @@ const Nav = () => {
         { name: "Entertainment", link: "entertainment" },
         { name: "Social", link: "social" },
         { name: "Video", link: "video" },
-        <i className="fa-brands fa-square-facebook"></i>
+      
 
 
     ];
