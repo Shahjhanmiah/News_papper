@@ -8,15 +8,15 @@ const {posts} = useContext(MainContext)
   
     const national = posts.filter(item => item.category === 'national' )
     const FirstNationNews = national[0];
-    const FirstNationalsubtitle = FirstNationNews?.content?.desc.substring(1,100)
+    const FirstNationalsubtitle = FirstNationNews?.content?.desc.substring(0,100)
 
     const international = posts.filter(item => item.category === 'international' )
     const FirstinternationalNews = international[0];
-    const FirstInternationalSubtitle = FirstinternationalNews?.content?.desc.substring(1,100)
+    const FirstInternationalSubtitle = FirstinternationalNews?.content?.desc.substring(0,100)
 
     const AllCountry = posts.filter(item => item.category === 'entertainment' )
     const FirstAllCountryNews = AllCountry[0];
-    const FirstAllCountrySubtitle = FirstAllCountryNews?.content?.desc.substring(1,100)
+    const FirstAllCountrySubtitle = FirstAllCountryNews?.content?.desc.substring(0,100)
     // console.log(national)
   
   return (

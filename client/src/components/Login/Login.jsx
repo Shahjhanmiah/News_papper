@@ -1,7 +1,6 @@
-import { Link, useLocation, useNavigate, } from 'react-router-dom';
+import { Link, useNavigate, } from 'react-router-dom';
 import logo from '../Categories/assets/Mobile-login.jpg'
 import { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '../ContextFile/AuthProvider';
 import Swal from 'sweetalert2'
 import SocialLogin from '../../Sharinng/SocialLogin/SocialLogin';
 import {useFormik} from 'formik'
@@ -23,6 +22,16 @@ const Login = () => {
       }
     }, [account])
     
+
+
+    const handleGogle = () => {
+        console.log('called gogle')
+    }
+    
+
+
+
+
 
 
     const formik = useFormik({
@@ -106,7 +115,7 @@ const Login = () => {
                                 <input className="btn bg-blue-600 hover:bg-blue-800 text-white" type="submit" value="Login" />
                             </div>
                         </form>
-                        <p className='text-center'>New to Genius Car <Link className='text-blue-600 font-bold' to="/signup">Sign Up</Link> </p>
+                        <p className='text-center pb-4'>Don't Have An Account? <Link className='text-blue-600 font-bold' to="/signup">Sign Up</Link> </p>
                         <SocialLogin></SocialLogin>
                     </div>
                 </div>

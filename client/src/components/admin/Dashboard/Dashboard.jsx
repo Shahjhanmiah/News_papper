@@ -1,13 +1,19 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import './Dashboard.css'
 import Chart from './../Dashboard/Chart'
 import Sidebar from '../sidebar/Sidebar'
 import Social_visitors from './Social_visitors'
 import adminImg from './../../../../public/hasan.jpg'
 import { FaThLarge, FaUserAlt,FaPuzzlePiece,FaSign} from "react-icons/fa";
+import { MainContext } from '../../context/PostContext'
+import { useNavigate } from 'react-router-dom'
 
 
-const Dashboard = () => {
+const Dashboard = ({account}) => {
+
+const navigate = useNavigate()
+
+
   return (
     <div className='mt-[100px] grid sm:grid-cols-1  md:grid-cols-3 lg:grid-cols-5  hy-5 gap-4 '>
         <div className='cols-start-1 cols-end-2  p-2 bg-slate-700'>

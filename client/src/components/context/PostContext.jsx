@@ -12,6 +12,7 @@ const PostContext = ({children}) => {
 
     useEffect(() => {
         getUser();
+        getAllPosts();
       }, [])
       
       
@@ -21,6 +22,14 @@ const PostContext = ({children}) => {
           }).catch(err => {
             console.log(err)
           })
+        }
+
+        const getAllPosts = async() => {
+
+          await  axios.get(`${base_url}/getposts`).then(res => {
+           setPosts(res.data) 
+          }).catch(err => console.log(err));
+    
         }
       
 

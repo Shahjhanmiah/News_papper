@@ -79,8 +79,8 @@ export const Login = async (req, res) => {
 
 export const getUser = async (req, res) => {
   console.log("getuser called");
-  console.log(req);
   const user = req.user;
+  console.log({user})
   try {
     return res.status(200).json(user);
   } catch (error) {
@@ -92,5 +92,11 @@ export const SignOut = async (req, res) => {
   req.logout(req.user, err => {
     if(err) return  res.status(500).json(err);
     return res.status(200).json({message:'user is now signed out'})
+  });
+};
+export const AuthFailed = async (req, res) => {
+  res.status(401).json({
+    success: false,
+    message: "failure",
   });
 };

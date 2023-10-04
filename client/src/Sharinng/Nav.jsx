@@ -9,10 +9,8 @@ import axios from 'axios';
 import Swal from 'sweetalert2'
 
 
-const Nav = () => {
-
-
-    const { account,setAccount } = useContext(MainContext)
+const Nav = ({account,isAdmin}) => {
+    const {setAccount } = useContext(MainContext)
     const [isUserHaveProfile, setIsUserHaveProfile] = useState(false)
     const ProfileText = account?.name?.charAt(0)
 
@@ -110,14 +108,14 @@ await axios.get(`${base_url}/signout`,{withCredentials:true}).then((res) =>{
                                 <Link to={`/category/${link.link}`} className='text-gray-800 hover:text-blue-400 duration-500'>{link.name}</Link>
                             </li>))
                     }
-                    {!isUserHaveProfile ? <Link to={'/signup'}>
+                    {!isUserHaveProfile ? <Link to={'/signin'}>
                         <button className='btn bg-blue-600 text-white md:ml-8 font-semibold px-3 py-1 rounded duration-500 md:static'>Get Started</button>
                     </Link>
                         : <li>
                             <div className='cursor-pointer' onClick={() => setIsDropDownOpen(!isDropDownOpen)}>
 
                                 {account?.photoURL ?
-                                    <img style={{ height: '45px' }} roundedcircle src={user?.photoURL}></img>
+                                    <img style={{ height: '45px' }} className=' rounded-full' src={account?.photoURL}></img>
                                     : <span className='text-white bg-blue-600 hover:bg-blue-800 p-4 rounded-full font-medium'>{ProfileText}</span>
                                    
                                 }
@@ -127,7 +125,7 @@ await axios.get(`${base_url}/signout`,{withCredentials:true}).then((res) =>{
 
                     <div id="dropdown" className={`z-10  absolute  md:right-0 md:top-20 ${isDropDownOpen ? 'block ' : 'hidden'} bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700`}>
                         <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" onClick={()=>setIsDropDownOpen(false)}>
-                            {account?.role === 'admin'  && <li>
+                            {isAdmin &&<li>
                                 <Link to={'/dashboard'} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white ">Dashboard</Link>
                             </li>}
                             <li>

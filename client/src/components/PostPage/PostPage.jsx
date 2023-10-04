@@ -1,36 +1,30 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { base_url } from '../../../base_url/Base_url';
+import { MainContext } from '../context/PostContext';
 
 const PostPage = () => {
 
   const [singlePost, setSinglePost] = useState();
-  const [posts, setPosts] = useState();
+ const {posts,setPosts} = useContext(MainContext)
 
   const params = useParams();
 
 
   useEffect(() => {
     findPost();
-    getAllPosts();
-  }, [])
+  }, [posts])
 
 
   const findPost = async () => {
     await axios.get(`${base_url}/post/${params.id}`).then(res => setSinglePost(res.data[0])).catch(err => console.log(err));
   }
 
-  const getAllPosts = async () => {
 
-    await axios.get(`${base_url}/getposts`).then(res => {
-      setPosts(res.data)
-    }).catch(err => console.log(err));
-
-  }
 
   const relatedPost = posts?.filter(post => post?.category === singlePost?.category && post._id !== singlePost._id);
-  console.log({ relatedPost })
+  console.log({ relatedPost,posts })
 
   return (
     <div className='mt-[100px] w-[90%] m-auto  grid grid-cols-1 lg:grid-cols-3 py-3'>

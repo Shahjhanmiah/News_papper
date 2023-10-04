@@ -12,18 +12,12 @@ const Allnews = () => {
     const params = useParams()
 
     useEffect(() => {
-        getAllPosts();
-    }, [params.id])
+        setCategory(posts?.filter(post => post?.category === params.id))
+    }, [params.id,posts])
 
     console.log(category)
 
-    const getAllPosts = async () => {
-
-        await axios.get(`${base_url}/getposts`).then(res => {
-            setCategory(res.data.filter(post => post?.category === params.id))
-        }).catch(err => console.log(err));
-
-    }
+ 
 
 
 

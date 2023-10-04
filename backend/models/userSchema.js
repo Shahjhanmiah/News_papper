@@ -8,8 +8,6 @@ const userShema = new mongoose.Schema({
     },
     email: {
       type: String,
-      required: true,
-      unique: true,
       validate(value) {
         if (!validator.isEmail(value)) {
           throw new Error("Invalid email address");
@@ -18,21 +16,22 @@ const userShema = new mongoose.Schema({
     },
     password: {
       type: String,
-      required: true,
       minlength: 6,
     },
     cpassword: {
       type: String,
-      required: true,
       minlength: 6,
     },
     role:{
       type: String,
-      enum:['admin','user','manager'],
+      enum:['admin','user','moderator'],
       default:'user',
     },
-    profilePic:{
+    photoURL:{
         type: String,
+    },
+    gogleId:{
+      type: String,
     }
   });
 
