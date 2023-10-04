@@ -23,17 +23,6 @@ const Login = () => {
     }, [account])
     
 
-
-    const handleGogle = () => {
-        console.log('called gogle')
-    }
-    
-
-
-
-
-
-
     const formik = useFormik({
         initialValues: {
             username: "",

@@ -97,7 +97,7 @@ const Nav = ({ account, isAdmin }) => {
                     }
                 </div>
                 {/* linke items */}
-                <ul className={`gap-2 md:flex md:items-center md:pb-0 pb-12 absolute md:static bg-white md:z-20 z-[-1]  left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${open ? 'top-12' : 'top-[-490px]'}`}>
+                <ul className={` md:flex md:items-center md:pb-0 pb-12 absolute md:static bg-white md:z-20 z-[-1]  left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${open ? 'top-12' : 'top-[-490px]'}`}>
 
                     <li className='md:ml-8 md:my-0 my-7 font-semibold' >
                         <Link to={`/`} className='text-gray-800 hover:text-blue-400 duration-500'>Home</Link>
@@ -115,8 +115,8 @@ const Nav = ({ account, isAdmin }) => {
                             <div className='cursor-pointer' onClick={() => setIsDropDownOpen(!isDropDownOpen)}>
 
                                 {account?.photoURL ?
-                                    <img style={{ height: '45px' }} className=' rounded-full' src={account?.photoURL}></img>
-                                    : <span className='text-white bg-blue-600 hover:bg-blue-800 p-4 rounded-full font-medium'>{ProfileText}</span>
+                                    <img style={{ height: '45px' }} className=' rounded-full mx-2' src={account?.photoURL}></img>
+                                    : <span className='mx-2 text-white bg-blue-600 hover:bg-blue-800 p-4 rounded-full font-medium'>{ProfileText}</span>
 
                                 }
                             </div>

@@ -10,7 +10,13 @@ import { useNavigate } from 'react-router-dom'
 
 
 
-const Dashboard = ({account}) => {
+const Dashboard = () => {
+  const {account , setAccount} = useContext(MainContext)
+  const ProfileText = account?.name?.charAt(0)
+  useEffect(() => {
+   
+  }, [account])
+  
 
 const navigate = useNavigate()
 
@@ -22,11 +28,11 @@ const navigate = useNavigate()
         </div>  
 
         <div className=' Right-site col-start-2 col-end-6   bg-slate-200'> 
-            <div className=' heading-div h-[80px] w-[100%] text-white bg-slate-700 pr-5  lg:pl-[80px] '>
+            <div className=' heading-div h-[80px] w-[100%] text-white bg-slate-700 pr-5  '>
                 <h1 className=' sm:text-1xl md:text-2xl lg:text-5xl pl-3 '> Admin Dashboard </h1>
                 <div className='admin-div'>
-                    <h4> Admin</h4>
-                    <img className=' sm:w-[30px] sm:h-[30px] lg:w-[40px] lg:h-[40px] h-[30px] w-[30px]  rounded-full '  src={adminImg} alt="" />
+                    <h4> {account?.role}</h4>
+                    {account?.photoURL ? <img className=' sm:w-[30px] sm:h-[30px] lg:w-[40px] lg:h-[40px] h-[30px] w-[30px]  rounded-full '  src={account?.photoURL && account?.photoURL} alt="" /> : <span  className='mx-2 text-white bg-blue-600 hover:bg-blue-800 p-4 rounded-full font-medium'>{ProfileText}</span>}
                 </div>
             </div>
              <div className=' grid lg:grid-cols-3 gap-5 px-5 mt-[50px]'>
