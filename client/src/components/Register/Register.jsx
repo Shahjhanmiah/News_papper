@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2'
-import logo from '../Categories/assets/Mobile-login.jpg'
+import logo from '../../assets/Mobile-login.jpg'
 import {useFormik} from 'formik'
 import * as Yup from 'yup';
 import { base_url } from '../../../base_url/Base_url';

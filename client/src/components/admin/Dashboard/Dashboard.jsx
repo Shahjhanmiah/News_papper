@@ -3,10 +3,11 @@ import './Dashboard.css'
 import Chart from './../Dashboard/Chart'
 import Sidebar from '../sidebar/Sidebar'
 import Social_visitors from './Social_visitors'
-import adminImg from './../../../../public/hasan.jpg'
+import adminImg from '../../../assets/hasan/hasan.jpg'
 import { FaThLarge, FaUserAlt,FaPuzzlePiece,FaSign} from "react-icons/fa";
 import { MainContext } from '../../context/PostContext'
 import { useNavigate } from 'react-router-dom'
+
 
 
 const Dashboard = ({account}) => {

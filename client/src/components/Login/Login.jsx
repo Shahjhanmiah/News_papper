@@ -1,5 +1,5 @@
 import { Link, useNavigate, } from 'react-router-dom';
-import logo from '../Categories/assets/Mobile-login.jpg'
+import logo from '../../assets/Mobile-login.jpg'
 import { useContext, useEffect, useState } from 'react';
 import Swal from 'sweetalert2'
 import SocialLogin from '../../Sharinng/SocialLogin/SocialLogin';

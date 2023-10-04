@@ -1,5 +1,5 @@
 import React from 'react'
-import DashboardLogo from '../../../../public/Logo.png'
+import DashboardLogo from '../../../assets/hasan/Logo.png'
 import { FaThLarge, FaUserAlt, FaPuzzlePiece, FaSign, FaCogs } from "react-icons/fa";
 import { AiOutlineCaretDown } from "react-icons/ai";
 import '../Dashboard/Dashboard.css'

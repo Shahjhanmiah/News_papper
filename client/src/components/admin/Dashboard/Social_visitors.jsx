@@ -1,8 +1,8 @@
 import React from 'react'
-import facebook from './../../../../public/icons8-facebook-48.png'
-import github from './../../../../public/icons8-google-48.png'
-import google from './../../../../public/icons8-twitter-circled-48.png'
-import teitter from './../../../../public/icons8-vimeo-48.png'
+import facebook from '../../../assets/hasan/icons8-facebook-48.png'
+import github from '../../../assets/hasan/icons8-google-48.png'
+import google from '../../../assets/hasan/icons8-twitter-circled-48.png'
+import teitter from '../../../assets/hasan/icons8-vimeo-48.png'
 
 const Social_visitors = () => { 
   return (
