@@ -18,8 +18,11 @@ export const addPost = async (req, res) => {
 };
 
 export const getPosts = async (req, res) => {
+
   try {
     const AllPost = await BlogModel.find({}).sort("-updatedAt");
+    console.log(AllPost);
+
 
     return res.status(201).json(AllPost);
   } catch (error) {
