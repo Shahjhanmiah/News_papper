@@ -97,7 +97,7 @@ export const getUser = async (req, res) => {
 export const getAllUser = async (req, res) => {
   console.log("alluser called");
   const userType = req.params.type;
-  
+  console.log(userType)
   try {
     const allUser = await User.find({role:userType});
     return res.status(200).json(allUser);

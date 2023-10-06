@@ -17,7 +17,9 @@ const Dashboard = ({account}) => {
    
   }, [account])
   
+  const {posts } = useContext(MainContext)
 
+  
 
   return (
     <div className='mt-[100px] grid sm:grid-cols-1  md:grid-cols-3 lg:grid-cols-5 gap-4 '>
@@ -37,7 +39,7 @@ const Dashboard = ({account}) => {
                   <div className=' p-5 bg-white'> 
                                <div className='post-icon'> <FaSign  /> </div>         
                        <h1 className='text-3xl font-bold '>All Post </h1>
-                       <p className='text-lg font-bold '> Total : 250 +</p>
+                       <p className='text-lg font-bold '> Total : {posts.length - 1} +</p>
                   </div>
                   <div className=' p-5 bg-white'> 
                                <div className='post-icon'> <FaUserAlt  /></div>         
