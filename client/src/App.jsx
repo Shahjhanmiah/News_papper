@@ -14,6 +14,8 @@ import Dashboard from './components/admin/Dashboard/Dashboard'
 import Error from './components/Error/Error'
 import Nav from './Sharinng/Nav'
 import Footer from './Sharinng/Footer'
+import Users from './components/admin/users/Users'
+import Loader from './components/loader/Loader'
 
 
 function App() {
@@ -21,6 +23,7 @@ function App() {
   const { account,posts } = useContext(MainContext)
   console.log(account)
   const [isAdmin, setIsAdmin] = useState(true)
+  const [isloading , setIsloading] = useState(false)
 
   useEffect(() => {
     switch (account.role) {
@@ -34,28 +37,32 @@ function App() {
       default:
         setIsAdmin(false)
     }
-    
+    Loading();
   }, [account])
 
-
-
-
+const Loading = () => {
+  setTimeout(() => {
+    setIsloading(true)
+  }, 3000);
+}
 
   return (
     <div className='w-[90%] m-auto'>
-      <Router>
+      {isloading ? <Router>
         <Nav account={account} isAdmin={isAdmin} />
         <Routes>
-          <Route path='/' element={<Home posts={posts} />} />
+         <Route path='/' element={<Home posts={posts} />} />
           <Route path='/category/:id'  element={<Allnews />} />
-          <Route path='/signup' element={ Object.keys(account).length !== 0 ? <Navigate to={'/'}/> : <Register />} />
+          <Route path='/signup' element={Object.keys(account).length !== 0 ? <Navigate to={'/'}/> : <Register />} />
           <Route path='/signin' element={Object.keys(account).length !== 0 ? <Navigate to={'/'}/> : <Login /> } />
           <Route path='/post/:id' element={<PostPage />} />
-          <Route path='/dashboard' element={isAdmin ? <Dashboard  account={account} /> : <Navigate to={'/erorr'} />} />
+          <Route path='/dashboard' element={isAdmin ? <Dashboard  account={account} /> : <Navigate to={'/error'}/>  } />
           <Route path='*' element={<Error />} />
+          <Route path='/users/:type' element={isAdmin ? <Users  account={account} /> : <Navigate to={'/error'}/> } />
+          <Route path='/addnewuser' element={isAdmin ? <Users  account={account} /> : <Navigate to={'/error'}/>  } />  
         </Routes>
         <Footer />
-      </Router>
+      </Router> : <Loader />}
     </div>
 
   )

@@ -10,19 +10,17 @@ import { useNavigate } from 'react-router-dom'
 
 
 
-const Dashboard = () => {
-  const {account , setAccount} = useContext(MainContext)
+const Dashboard = ({account}) => {
+
   const ProfileText = account?.name?.charAt(0)
   useEffect(() => {
    
   }, [account])
   
 
-const navigate = useNavigate()
-
 
   return (
-    <div className='mt-[100px] grid sm:grid-cols-1  md:grid-cols-3 lg:grid-cols-5  hy-5 gap-4 '>
+    <div className='mt-[100px] grid sm:grid-cols-1  md:grid-cols-3 lg:grid-cols-5 gap-4 '>
         <div className='cols-start-1 cols-end-2  p-2 bg-slate-700'>
           <Sidebar />
         </div>  

@@ -2,6 +2,9 @@ import BlogModel from "../models/BlogSchema.js";
 import User from "../models/userSchema.js";
 import bcrypt from "bcrypt";
 const saltRounds = 10;
+import dotenv from 'dotenv'
+
+dotenv.config();
 
 export const Homepage = (req, res) => {};
 
@@ -91,12 +94,25 @@ export const getUser = async (req, res) => {
   }
 };
 
+export const getAllUser = async (req, res) => {
+  console.log("alluser called");
+  const userType = req.params.type;
+  
+  try {
+    const allUser = await User.find({role:userType});
+    return res.status(200).json(allUser);
+  } catch (error) {
+    return res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
 export const SignOut = async (req, res) => {
   req.logout(req.user, err => {
     if(err) return  res.status(500).json(err);
     return res.status(200).json({message:'user is now signed out'})
   });
 };
+
 export const AuthFailed = async (req, res) => {
   res.status(401).json({
     success: false,
