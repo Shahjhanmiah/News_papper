@@ -17,6 +17,7 @@ import Footer from './Sharinng/Footer'
 import Users from './components/admin/users/Users'
 import Loader from './components/loader/Loader'
 import Posts from './components/admin/posts/Posts'
+import Addnewpost from './components/admin/posts/Addnewpost'
 
 
 function App() {
@@ -62,6 +63,7 @@ const Loading = () => {
           <Route path='/users/:type' element={isAdmin ? <Users  account={account} /> : <Navigate to={'/error'}/> } />
           <Route path='/addnewuser' element={isAdmin ? <Users  account={account} /> : <Navigate to={'/error'}/>  } />  
           <Route path='/posts' element={isAdmin ? <Posts  account={account} posts={posts} /> : <Navigate to={'/error'}/>  } />  
+          <Route path='/addnewpost' element={isAdmin ? <Addnewpost  account={account} /> : <Navigate to={'/error'}/>  } />  
         </Routes>
         <Footer />
       </Router> : <Loader />}

@@ -23,7 +23,13 @@ const Sidebar = () => {
         <img style={{ width: "100%", height: '70px', borderRadius: '0px 10px 0px 10px' }} src={DashboardLogo} alt="" />
       </div>
 
-      <div className='menu mt-3 text-white' >
+      <div className='menu mt-3 text-white ' >
+        <div className='flex flex-col items-center justify-center text-center mx-auto font-medium bg-blue-600 w-full rounded py-2 mb-3'>
+        {account?.photoURL ?  <img className='w-10 h-10 rounded-full' src={account.photoURL} alt="" /> : <span className=' text-white text-2xl rounded-full font-medium cursor-pointer w-full' >{account.name}</span>
+        }
+        <span className='text-xl text-warning'>{account?.role}</span>
+        </div>
+        
         <h3 className='text-lg'>Menu</h3>
         <div className='mt-5 '>
 

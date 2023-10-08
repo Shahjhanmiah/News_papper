@@ -9,13 +9,17 @@ dotenv.config();
 export const Homepage = (req, res) => {};
 
 export const addPost = async (req, res) => {
-  const { title, content, tags, category } = req.body;
+  const { title,content,category,tags } = req.body;
+  const comma = ', ';
+  const TagString = tags.join(comma);
+  console.log(title,content,category,TagString);
 
   try {
-    const newPost = await new BlogModel({ title, content, tags, category });
+    const newPost = await new BlogModel({ title,content,category,tags:TagString } );
     const post = await newPost.save();
     return res.status(201).json(post);
   } catch (error) {
+    console.log(error);
     return res.status(500).json({ message: "error adding post" });
   }
 };
@@ -94,12 +98,33 @@ export const getUser = async (req, res) => {
   }
 };
 
-export const getAllUser = async (req, res) => {
+export const getSpecificUsers = async (req, res) => {
   console.log("alluser called");
   const userType = req.params.type;
   console.log(userType)
   try {
     const allUser = await User.find({role:userType});
+    return res.status(200).json(allUser);
+  } catch (error) {
+    return res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
+export const getCategories = async (req, res) => {
+  console.log("get categories called");
+  try {
+    const allCategory = await BlogModel.distinct('category');
+    console.log(allCategory)
+    return res.status(200).json(allCategory);
+  } catch (error) {
+    return res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
+export const getAllUser = async (req, res) => {
+  console.log('all user called')
+  try {
+    const allUser = await User.find({});
     return res.status(200).json(allUser);
   } catch (error) {
     return res.status(500).json({ message: "Something went wrong" });
