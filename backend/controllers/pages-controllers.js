@@ -55,6 +55,16 @@ export const getSinglePost = async (req, res) => {
     return res.status(500).json({ message: "error adding post" });
   }
 };
+export const getSingleUser = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const user = await User.find({ _id: id });
+    return res.status(201).json(user);
+  } catch (error) {
+    return res.status(500).json({ message: "error adding post" });
+  }
+};
 
 export const register = async (req, res) => {
   const { name, email, password, cpassword } = req.body;
@@ -163,6 +173,21 @@ export const deleteBlog = async (req, res) => {
     return res.status(500).json(error.message);
   }
 };
+
+export const deleteUser = async (req, res) => {
+  console.log(req.params.id);
+  try {
+    await User.findByIdAndRemove(req.params.id);
+    const Users = await User.find();
+    return res.status(200).json(Users);
+  } catch (error) {
+    return res.status(500).json(error.message);
+  }
+};
+
+
+
+
 export const editPost = async (req, res) => {
   console.log(req.params.id);
   const { id } = req.params;
@@ -178,6 +203,24 @@ export const editPost = async (req, res) => {
     await BlogModel.findByIdAndUpdate(query, update, option);
     const Blog = await BlogModel.find().sort("-updatedAt");
     return res.status(200).json(Blog);
+  } catch (error) {
+    return res.status(500).json(error.message);
+  }
+};
+
+export const editUser = async (req, res) => {
+  console.log(req.params.id);
+  const { id } = req.params;
+  const { name , role } = req.body;
+
+  const query = { _id: id };
+  const update = { name , role};
+  const option = { new: true };
+
+  try {
+   await User.findByIdAndUpdate(query, update, option);
+   const user  = await User.findById(id)
+    return res.status(200).json(user);
   } catch (error) {
     return res.status(500).json(error.message);
   }

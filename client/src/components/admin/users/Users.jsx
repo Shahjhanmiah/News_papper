@@ -15,6 +15,12 @@ console.log(type)
     useEffect(() => {
       getAllUser();
     }, [type])
+
+    
+    useEffect(() => {
+     
+    }, [user])
+    
     
 console.log({user})
 
@@ -30,13 +36,18 @@ console.log({user})
         })
     }
 
+    const handleDelete = async(id) => {
+        await axios.delete(`${base_url}/deleteuser/${id}`,{withCredentials:true}).then(res=> {
+           setUser(res.data)
+        }).catch(err => console.log(err) );
+    }
 
   return (
     <div className='mt-[100px] grid sm:grid-cols-1  md:grid-cols-3 lg:grid-cols-5 gap-4 '>
         <div className='cols-start-1 cols-end-2  p-2 bg-slate-700'> 
             <Sidebar />
         </div>
-        <User userType={params.type} user={user} />
+        <User userType={params.type} user={user} handleDelete={handleDelete} />
     </div>
   )
 }
