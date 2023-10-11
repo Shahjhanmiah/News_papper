@@ -23,7 +23,7 @@ import Addnewpost from './components/admin/posts/Addnewpost'
 function App() {
 
   const { account,posts } = useContext(MainContext)
-  console.log(account)
+  
   const [isAdmin, setIsAdmin] = useState(true)
   const [isloading , setIsloading] = useState(false)
 
@@ -64,6 +64,7 @@ const Loading = () => {
           <Route path='/addnewuser' element={isAdmin ? <Users  account={account} /> : <Navigate to={'/error'}/>  } />  
           <Route path='/posts' element={isAdmin ? <Posts  account={account} posts={posts} /> : <Navigate to={'/error'}/>  } />  
           <Route path='/addnewpost' element={isAdmin ? <Addnewpost  account={account} /> : <Navigate to={'/error'}/>  } />  
+          <Route path='/edit/:id' element={isAdmin ? <Addnewpost  account={account} /> : <Navigate to={'/error'}/>  } />  
         </Routes>
         <Footer />
       </Router> : <Loader />}

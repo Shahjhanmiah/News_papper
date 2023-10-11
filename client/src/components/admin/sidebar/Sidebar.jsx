@@ -18,6 +18,7 @@ const Sidebar = () => {
 
 
   return (
+
     <>
       <div className='Logo'>
         <img style={{ width: "100%", height: '70px', borderRadius: '0px 10px 0px 10px' }} src={DashboardLogo} alt="" />
@@ -41,7 +42,7 @@ const Sidebar = () => {
             <Link to={'/posts'} className="dropbtn font-medium bg-white p-2 text-lg text-black mb-2 br-5 rounded-md "> <span >  <i className='flex icon-div '> <FaSign />    Posts </i> </span>   </Link>
           </div>
           <div className="dropdown w-[100%] sm:w-[100%] md:w-[100%] xl:w-[100%] lg:w-[100%] ">
-            <button className="dropbtn font-medium bg-white p-2 text-lg text-black mb-2 br-5 rounded-md "> <span >  <i className='flex icon-div '> <FaUserAlt />  Users </i> </span>  <sapn  > <AiOutlineCaretDown /> </sapn> </button>
+            <button className="dropbtn font-medium bg-white p-2 text-lg text-black mb-2 br-5 rounded-md "> <span >  <i className='flex icon-div '> <FaUserAlt />  Users </i> </span>  <span  > <AiOutlineCaretDown /> </span> </button>
             <div className="dropdown-content">
               <Link to={'/users/admin'}>Admin</Link>
               <Link to={'/users/moderator'}>Moderator</Link>

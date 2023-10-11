@@ -38,9 +38,7 @@ const PostPage = () => {
         <hr />
         <div className='flex flex-col items-center justify-start gap-3 my-5 px-5'>
           <img src={singlePost?.content?.img} alt="PostImg" />
-          <p>
-            {singlePost?.content?.desc}
-          </p>
+          <div dangerouslySetInnerHTML={{__html: singlePost?.content?.desc}}></div>
         </div>
         <h3 className='bold font-bold text-2xl mx-3'>সম্পর্কিত আরও পড়ুন</h3>
         <div className=' grid lg:grid-cols-3 gap-3 m-3'>

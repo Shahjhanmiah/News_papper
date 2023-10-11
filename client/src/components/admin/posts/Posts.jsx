@@ -1,17 +1,36 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Sidebar from '../sidebar/Sidebar'
 import { MainContext } from '../../context/PostContext'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
+import { base_url } from '../../../../base_url/Base_url'
 
-const Posts = ({ account, posts }) => {
+const Posts = ({ account }) => {
 
-
-
+const {posts , setPosts} = useContext(MainContext)
+useEffect(()=> {
+    getAllPosts();
+},[]);
 
     const user = [
         { name: 'John', email: 'masum@gmail.com', photoURL: "http://www.gmail.com", role: "admin" },
         { name: 'John', email: 'masum@gmail.com', photoURL: "http://www.gmail.com", role: "admin" },
     ]
+
+    const handleDelete = async(id) => {
+        await axios.delete(`${base_url}/deleteblog/${id}`,{withCredentials:true}).then(res=> {
+            console.log(res)
+        }).catch(err => console.log(err) );
+    }
+
+    const getAllPosts = async() => {
+
+        await  axios.get(`${base_url}/getposts`).then(res => {
+         setPosts(res.data) 
+        }).catch(err => console.log(err));
+  
+      }
+    
 
     return (
         <div className='mt-[100px] grid sm:grid-cols-1  md:grid-cols-3 lg:grid-cols-5 gap-4'>
@@ -58,8 +77,8 @@ const Posts = ({ account, posts }) => {
                                         <td>{post?.category}</td>
                                         <td>{post?.author}</td>
                                         <th className='flex flex-col gap-3 '>
-                                            <button className="btn  btn-xs btn-primary text-white">Delete</button>
-                                            <button className="btn btn-accent btn-xs">Edit</button>
+                                            <button className="btn  btn-xs btn-primary text-white" onClick={()=>handleDelete(post._id)}>Delete</button>
+                                            <Link to={`/edit/${post._id}`} className="btn btn-accent btn-xs">Edit</Link>
                                         </th>
                                     </tr>
                                 )

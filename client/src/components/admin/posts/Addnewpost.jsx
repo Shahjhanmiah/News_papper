@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import axios from 'axios';
 import { base_url } from '../../../../base_url/Base_url';
 import { FaXmark } from "react-icons/fa6";
+import { useNavigate, useParams } from 'react-router-dom';
+import { set } from 'mongoose';
 
 
 const toolbarOptions = [
@@ -39,12 +41,12 @@ const quillStyle = {
 
 const Addnewpost = () => {
 
-  
+
     const [title, setTitle] = useState('')
 
     const [tagsInput, setTagsInput] = useState('');
     const [tags, setTags] = useState([]);
-    const [imgUrl , setImgUrl ] =  useState('');
+    const [imgUrl, setImgUrl] = useState('');
 
 
     const [file, setFile] = useState('')
@@ -52,11 +54,45 @@ const Addnewpost = () => {
     const [categories, setCategories] = useState('')
     const [category, setCategory] = useState('')
 
+    const navigate = useNavigate();
+    const {id} = useParams();
+    
+    const imageRef = useRef(null);
+    const fileInputRef = useRef(null);
 
 
     useEffect(() => {
         getCategories();
-    }, [tags, category,title])
+        findPost();
+    }, [])
+
+
+  
+
+  const handleImageClick = () => {
+    console.log('clicked')
+    fileInputRef.current.click();
+  };
+
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+
+    if (selectedFile) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        imageRef.current.src = e.target.result;
+      };
+      reader.readAsDataURL(selectedFile);
+      setFile(selectedFile)
+      console.log({file})
+    }
+  };
+
+
+
+
+
+
 
     const handleAddItem = () => {
 
@@ -71,7 +107,7 @@ const Addnewpost = () => {
         setTags(newData);
     }
 
-    console.log({title})
+    console.log({ title })
 
     const getCategories = async () => {
         await axios.get(`${base_url}/getcategories`, { withCredentials: true }).then(res => {
@@ -86,46 +122,74 @@ const Addnewpost = () => {
     }
 
 
-    const handleSubmit = async(e) => {
+
+    const handleSubmit = async (e) => {
+        console.log('clicked')
         e.preventDefault();
         const formData = new FormData();
-        formData.append('image',file)
+        formData.append('image', file)
         const Api = "https://api.imgbb.com/1/upload?expiration=600&key=7dfd97eb382b65ec8ec1a88ce98dfab1"
-        await axios.post(Api,formData).then(res => {
+        await axios.post(Api, formData).then(res => {
             setImgUrl(res.data.data.url);
-        }).catch(err => console.log(err));
-        if(imgUrl){
             const data = {
-                title ,
-                content:{
-                    desc:value,
-                    img:imgUrl
+                title,
+                content: {
+                    desc: value,
+                    img: imgUrl
                 },
                 category,
                 tags
             }
-            await axios.post(`${base_url}/createblog`,data,{withCredentials:true}).then(res => {
-                console.log(res.data);
+           
+             axios.post(`${base_url}/createblog`, data, { withCredentials: true }).then(res => {
+                console.log(res)
+                if (res.status === 200) {
+                    setTitle(''),
+                        setValue(''),
+                        setTags(''),
+                        setCategory(''),
+                        setFile(''),
+                        setImgUrl(''),
+                        setTagsInput(''),
+                        navigate('/posts')
+                }
 
             }).catch(err => {
                 console.log(err);
             })
-             
-        }
+        }).catch(err => console.log(err));       
     }
+
+
+
+
+    const findPost = async () => {
+        await axios.get(`${base_url}/post/${id}`).then(res => {
+            const data = res.data[0]
+            setTitle(data.title);
+            setValue(data.content.desc);
+            setImgUrl(data.content.img);
+            setCategory(data.category);
+            setTags(data.tags.split(','));
+        }).catch(err => console.log(err));
+      }
     
+
+      console.log({title , value , imgUrl , category , tags})
+
+
 
     return (
         <div className='mt-[100px] '>
             <div className='card card-compact bg-base-100 shadow-xl w-[60%] mx-auto'>
                 <h1 className='w-full bg-blue-600 text-white rounded py-3 mx-auto text-center font-bold'>Add New Post</h1>
                 <div className='mx-auto lg:w-full'>
-                    <form className="card-body" onSubmit={(e)=>handleSubmit(e)}>
+                    <form className="card-body" onSubmit={(e) => handleSubmit(e)}>
                         <div className="form-control">
                             <label htmlFor='title' className="label" >
                                 <span className="label-text font-medium text-lg">Title</span>
                             </label>
-                            <input id='title' type="text" name='title' placeholder="Post Title" className="input input-bordered  focus:outline-blue-600" onClick={(e) => setTitle(e.target.value)} />
+                            <input id='title' type="text" name='title' placeholder="Post Title" className="input input-bordered  focus:outline-blue-600" value={title} onChange={(e) => setTitle(e.target.value)} />
 
                         </div>
                         <div className="form-control">
@@ -142,17 +206,21 @@ const Addnewpost = () => {
                                 <span className="label-text font-medium text-lg">Image</span>
                             </label>
 
-                            <input type="file" name='image' id='image' className="focus:outline-blue-600 file-input file-input-bordered w-full " onChange={(e) => setFile(e.target.files[0])} />
+                            {imgUrl && <img src={`${imgUrl}`} useRef={imageRef} onClick={handleImageClick} />}
+                            
+                            <input useRef={fileInputRef} type="file" name='image' id='image' className="focus:outline-blue-600 file-input file-input-bordered w-full " onChange={handleFileChange} />
+
+                           
 
                         </div>
                         <div className="form-control">
                             <label htmlFor='category' className="label">
                                 <span className="label-text font-medium text-lg">Category</span>
                             </label>
-                         <select id='category' name='category' className="focus:outline-blue-600 select select-bordered w-full" onChange={(e) => setCategory(e.target.value)}>
+                            <select id='category' name='category' className="focus:outline-blue-600 select select-bordered w-full" value={category} onChange={(e) => setCategory(e.target.value)}>
                                 <option disabled selected>Select The Category?</option>
 
-                                {categories && categories.map(item=> <option>{item}</option>)}
+                                {categories && categories.map(item => <option>{item}</option>)}
                             </select>
 
                         </div>
@@ -167,7 +235,7 @@ const Addnewpost = () => {
                                 <button className='btn bg-blue-600 text-white ' type='button' onClick={handleAddItem}>Add</button>
                             </div>
                             <div className='grid grid-cols-4 gap-3  flex-wrap mt-5'>
-                                {tags.map((tag, i) => <div className=' cursor-pointer  flex justify-between items-center  bg-blue-900 p-2  rounded text-white'>
+                                {tags?.map((tag, i) => <div className=' cursor-pointer  flex justify-between items-center  bg-blue-900 p-2  rounded text-white'>
                                     <span>{tag}</span>
                                     <FaXmark className='cursor-pointer' onClick={() => handleRemoveTags(i)} />
 
