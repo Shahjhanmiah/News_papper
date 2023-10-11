@@ -10,15 +10,23 @@ export const Homepage = (req, res) => {};
 
 export const addPost = async (req, res) => {
   const { title, content, category, tags } = req.body;
+  console.log({ content });
   const comma = ", ";
   const TagString = tags.join(comma);
   const author = req.user.name;
-  console.log(req.user)
+  console.log(req.user);
 
   try {
-    const newPost = await new BlogModel({ title,content,category,tags:TagString,author:author } );
-    const post = await newPost.save();
-    return res.status(200).json("all ok");
+    const newPost = await new BlogModel({
+      title,
+      content,
+      category,
+      tags: TagString,
+      author: author,
+    });
+    await newPost.save();
+    const AllPost = await BlogModel.find({}).sort("-updatedAt");
+    return res.status(200).json(AllPost);
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: "error adding post" });
@@ -148,8 +156,27 @@ export const AuthFailed = async (req, res) => {
 export const deleteBlog = async (req, res) => {
   console.log(req.params.id);
   try {
-    await BlogModel.findByIdAndRemove(req.params.id)
-    const Blog = await BlogModel.find();
+    await BlogModel.findByIdAndRemove(req.params.id);
+    const Blog = await BlogModel.find().sort("-updatedAt");
+    return res.status(200).json(Blog);
+  } catch (error) {
+    return res.status(500).json(error.message);
+  }
+};
+export const editPost = async (req, res) => {
+  console.log(req.params.id);
+  const { id } = req.params;
+  const { title, content, category, tags } = req.body;
+  const TagString = tags.join(", ");
+  const author = req.user.name;
+
+  const query = { _id: id };
+  const update = { title, content, category, tags: TagString, author: author };
+  const option = { new: true };
+
+  try {
+    await BlogModel.findByIdAndUpdate(query, update, option);
+    const Blog = await BlogModel.find().sort("-updatedAt");
     return res.status(200).json(Blog);
   } catch (error) {
     return res.status(500).json(error.message);

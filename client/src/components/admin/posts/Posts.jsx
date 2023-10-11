@@ -8,29 +8,17 @@ import { base_url } from '../../../../base_url/Base_url'
 const Posts = ({ account }) => {
 
 const {posts , setPosts} = useContext(MainContext)
-useEffect(()=> {
-    getAllPosts();
-},[]);
 
-    const user = [
-        { name: 'John', email: 'masum@gmail.com', photoURL: "http://www.gmail.com", role: "admin" },
-        { name: 'John', email: 'masum@gmail.com', photoURL: "http://www.gmail.com", role: "admin" },
-    ]
+useEffect(()=> {
+  
+},[posts]);
 
     const handleDelete = async(id) => {
         await axios.delete(`${base_url}/deleteblog/${id}`,{withCredentials:true}).then(res=> {
-            console.log(res)
+           setPosts(res.data)
         }).catch(err => console.log(err) );
     }
 
-    const getAllPosts = async() => {
-
-        await  axios.get(`${base_url}/getposts`).then(res => {
-         setPosts(res.data) 
-        }).catch(err => console.log(err));
-  
-      }
-    
 
     return (
         <div className='mt-[100px] grid sm:grid-cols-1  md:grid-cols-3 lg:grid-cols-5 gap-4'>

@@ -1,5 +1,5 @@
 import express from 'express';
-import { Homepage,addPost,getPosts,getSinglePost,register,Login,getUser,SignOut,AuthFailed,getAllUser,getSpecificUsers,getCategories,deleteBlog } from '../controllers/pages-controllers.js';
+import { Homepage,addPost,getPosts,getSinglePost,register,Login,getUser,SignOut,AuthFailed,getAllUser,getSpecificUsers,getCategories,deleteBlog,editPost } from '../controllers/pages-controllers.js';
 import passport from 'passport';
 import { checkAuth } from './passport.js';
 const CLIENT_URL  = 'http://localhost:5173/'
@@ -21,7 +21,9 @@ router.get('/post/:id',getSinglePost )
 // router.post('/addpost',addPost)
 router.post('/register',register)
 router.post('/createblog',addPost)
+router.post('/updateblog/:id',editPost)
 router.post('/login',passport.authenticate('local'),Login)
 router.delete('/deleteblog/:id',deleteBlog)
+
 
 export default router;

@@ -3,6 +3,9 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { base_url } from '../../../base_url/Base_url';
 import { MainContext } from '../context/PostContext';
+import Markdown from 'react-markdown'
+import rehypeRaw from 'rehype-raw'
+
 
 const PostPage = () => {
 
@@ -38,7 +41,7 @@ const PostPage = () => {
         <hr />
         <div className='flex flex-col items-center justify-start gap-3 my-5 px-5'>
           <img src={singlePost?.content?.img} alt="PostImg" />
-          <div dangerouslySetInnerHTML={{__html: singlePost?.content?.desc}}></div>
+         <Markdown rehypePlugins={rehypeRaw}>{singlePost?.content?.desc}</Markdown>
         </div>
         <h3 className='bold font-bold text-2xl mx-3'>সম্পর্কিত আরও পড়ুন</h3>
         <div className=' grid lg:grid-cols-3 gap-3 m-3'>

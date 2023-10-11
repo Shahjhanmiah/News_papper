@@ -34,13 +34,14 @@ const Nav = ({ account, isAdmin }) => {
 
 
     let Links = [
+
+        { name: "Entertainment", link: "intertainment" },
+        { name: "Finance", link: "finance" },
+        { name: "Health", link: "health" },
         { name: "International", link: "international" },
         { name: "National", link: "national" },
-        { name: "Playing", link: "playing" },
-        { name: "Entertainment", link: "entertainment" },
-        { name: "Social", link: "social" },
-        { name: "Video", link: "video" },
-
+        { name: "Politics", link: "politics" },
+        { name: "Technology", link: "technology" },
 
 
     ];
