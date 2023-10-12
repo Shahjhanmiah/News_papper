@@ -83,6 +83,7 @@ export const register = async (req, res) => {
           email,
           password: hashedPassword,
           cpassword: HashedCpassword,
+
         });
         await newUser.save();
         return res

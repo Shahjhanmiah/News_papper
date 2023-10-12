@@ -62,7 +62,7 @@ const EditUser = () => {
             setName(data.name);
             setRole(data.role);
             setEmail(data.email);
-            setgogleId(data.gogle)
+            setgogleId(data.gogleId)
         }).catch(err => console.log(err));
     }
 
@@ -89,7 +89,7 @@ const EditUser = () => {
 
                         {gogleId && <div className="form-control">
                             <label htmlFor='gogleid' className="label" >
-                                <span className="label-text font-medium text-lg">Email</span>
+                                <span className="label-text font-medium text-lg">Gogle ID</span>
                             </label>
                             <input id='gogleid' type="text" name='gogleid' value={gogleId} readOnly placeholder="gogleid" className="input input-bordered  focus:outline-blue-600"  />
 
@@ -97,7 +97,7 @@ const EditUser = () => {
 
                         <div className="form-control">
                             <label htmlFor='category' className="label">
-                                <span className="label-text font-medium text-lg">Category</span>
+                                <span className="label-text font-medium text-lg">Role</span>
                             </label>
                             <select id='category' name='category' className="focus:outline-blue-600 select select-bordered w-full" value={role} onChange={(e) => setRole(e.target.value)}>
                                 <option disabled selected>Select The Category?</option>
