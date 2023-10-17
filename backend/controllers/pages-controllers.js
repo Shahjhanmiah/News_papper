@@ -97,9 +97,9 @@ export const register = async (req, res) => {
 };
 
 export const Login = async (req, res) => {
-  console.log(req);
+  console.log(req.session.passport.user);
   try {
-    return res.status(200).json(req.user);
+    return res.status(200).json(req.session.passport.user);
   } catch (error) {
     return res.status(500).json({ message: "Something went wrong" });
   }

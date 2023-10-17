@@ -34,6 +34,7 @@ const Login = () => {
         }),
         onSubmit: async (values) => {
             await axios.post(`${base_url}/login`, values, { withCredentials: true }).then(res => {
+                console.log(res.data)
                 setAccount(res.data)
                 if (res.status== 200) {
                     formik.resetForm();

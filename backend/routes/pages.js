@@ -24,7 +24,7 @@ router.post('/register',register)
 router.post('/createblog',addPost)
 router.post('/updateblog/:id',editPost)
 router.post('/updateuser/:id',editUser)
-router.post('/login',passport.authenticate('local'),Login)
+router.post('/login',passport.authenticate('local',{ failureRedirect: `/login/failed`}),Login)
 router.delete('/deleteblog/:id',deleteBlog)
 router.delete('/deleteuser/:id',deleteUser)
 

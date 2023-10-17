@@ -11,7 +11,18 @@ const PostPage = () => {
 
   const [singlePost, setSinglePost] = useState();
  const {posts,setPosts} = useContext(MainContext)
+ 
+ const [comment, setComment] = useState("");
+  const [comments, setComments] = useState([]);
 
+
+  const onChangeHandler = (e) => {
+    setComment(e.target.value);
+  };
+
+console.log({comment})
+
+  
   const params = useParams();
 
 
@@ -31,6 +42,7 @@ const PostPage = () => {
 
   return (
     <div className='mt-[100px] w-[90%] m-auto  grid grid-cols-1 lg:grid-cols-3 py-3'>
+
       <div className='col-span-2 '>
         <h1 className='text-3xl font-bold m-4'>{singlePost?.title}</h1>
         <div className='flex justify-start items-center gap-2 text-start m-4'>
@@ -73,6 +85,23 @@ const PostPage = () => {
 
         </div>
       </div>
+
+      <div className="main-container">
+      {comments.map((text) => (
+        <div className="comment-container">{text}</div>
+      ))}
+      <div className="comment-flexbox">
+        <h3 className="comment-text">Comment</h3>
+        <textarea
+          value={comment}
+          onChange={onChangeHandler}
+          className="input-box"
+        />
+        <button  className="comment-button">
+          Submit
+        </button>
+      </div>
+    </div>
     </div>
   )
 }
