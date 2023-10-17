@@ -51,9 +51,13 @@ const Sidebar = () => {
             </div>
           </div>
           <div className="dropdown w-[100%] sm:w-[100%] md:w-[100%] xl:w-[100%] lg:w-[100%] ">
-            <Link to={'/comments'} className="dropbtn font-medium bg-white p-2 text-lg text-black mb-2 br-5 rounded-md "> <span >  <i className='flex icon-div '> <FaComments />  Comments </i> </span> </Link>
-
+            <button className="dropbtn font-medium bg-white p-2 text-lg text-black mb-2 br-5 rounded-md "> <span >  <i className='flex icon-div '> <FaComments />  Comments </i> </span>  <span  > <AiOutlineCaretDown /> </span> </button>
+            <div className="dropdown-content">
+              <Link to={'/comments/approved'}>Approved Comments</Link>
+              <Link to={'/comments/unapproved'}>Unapproved Comments</Link>
+            </div>
           </div>
+
           <div className="dropdown w-[100%] sm:w-[100%] md:w-[100%] xl:w-[100%] lg:w-[100%] ">
             <Link to={'/notifications'} className="dropbtn font-medium bg-white p-2 text-lg text-black mb-2 br-5 rounded-md "> <span >  <i className='flex icon-div '> <AiFillBell />  Notifications </i> </span> </Link>
 

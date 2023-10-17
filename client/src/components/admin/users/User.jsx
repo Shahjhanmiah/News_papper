@@ -7,9 +7,7 @@ import { base_url } from '../../../../base_url/Base_url'
 const User = ({ userType, user,handleDelete }) => {
     const { account } = useContext(MainContext)
 
-
-    
-
+ 
 
     return (
         <div className='col-start-2 col-end-6  bg-slate-200'>

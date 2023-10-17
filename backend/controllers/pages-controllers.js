@@ -1,4 +1,5 @@
 import BlogModel from "../models/BlogSchema.js";
+import CommentModel from "../models/CommentSchema.js";
 import User from "../models/userSchema.js";
 import bcrypt from "bcrypt";
 const saltRounds = 10;
@@ -38,10 +39,10 @@ export const getPosts = async (req, res) => {
     const AllPost = await BlogModel.find({}).sort("-updatedAt");
     console.log(AllPost);
 
-    return res.status(201).json(AllPost);
+    return res.status(200).json(AllPost);
   } catch (error) {
     console.log(error);
-    return res.status(500).json({ message: "error adding post" });
+    return res.status(500).json({ message: "error while getting post" });
   }
 };
 
@@ -52,7 +53,7 @@ export const getSinglePost = async (req, res) => {
     const post = await BlogModel.find({ _id: id }).sort("-updatedAt");
     return res.status(201).json(post);
   } catch (error) {
-    return res.status(500).json({ message: "error adding post" });
+    return res.status(500).json({ message: "error while getting single post" });
   }
 };
 export const getSingleUser = async (req, res) => {
@@ -60,9 +61,45 @@ export const getSingleUser = async (req, res) => {
 
   try {
     const user = await User.find({ _id: id });
-    return res.status(201).json(user);
+    return res.status(200).json(user);
   } catch (error) {
-    return res.status(500).json({ message: "error adding post" });
+    return res.status(500).json({ message: "error while getting single user" });
+  }
+};
+export const getComments = async (req, res) => {
+  const { type } = req.params;
+
+  try {
+    const comments = await CommentModel.find({ isApproved: type });
+    console.log({ comments });
+    return res.status(200).json(comments);
+  } catch (error) {
+    return res.status(500).json({ message: "error while getting comments" });
+  }
+};
+export const getPostComments = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const comments = await CommentModel.find({ postId: id, isApproved:'approved' });
+    return res.status(200).json(comments);
+  } catch (error) {
+    return res.status(500).json({ message: "error while getting comments" });
+  }
+};
+
+
+
+export const approveComment = async (req, res) => {
+  const { id } = req.params;
+  const query = { _id: id };
+  const update = { isApproved: 'approved' };
+  const option = { new: true };
+  try {
+    const comment = await CommentModel.findByIdAndUpdate(query,update,option);
+    return res.status(200).json(comment);
+  } catch (error) {
+    return res.status(500).json({ message: "error approving comment" });
   }
 };
 
@@ -83,7 +120,6 @@ export const register = async (req, res) => {
           email,
           password: hashedPassword,
           cpassword: HashedCpassword,
-
         });
         await newUser.save();
         return res
@@ -186,8 +222,16 @@ export const deleteUser = async (req, res) => {
   }
 };
 
-
-
+export const deleteComment = async (req, res) => {
+  console.log(req.params.id);
+  try {
+    await CommentModel.findByIdAndRemove(req.params.id);
+    const comments = await CommentModel.find();
+    return res.status(200).json(comments);
+  } catch (error) {
+    return res.status(500).json(error.message);
+  }
+};
 
 export const editPost = async (req, res) => {
   console.log(req.params.id);
@@ -212,16 +256,46 @@ export const editPost = async (req, res) => {
 export const editUser = async (req, res) => {
   console.log(req.params.id);
   const { id } = req.params;
-  const { name , role } = req.body;
+  const { name, role } = req.body;
 
   const query = { _id: id };
-  const update = { name , role};
+  const update = { name, role };
   const option = { new: true };
 
   try {
-   await User.findByIdAndUpdate(query, update, option);
-   const user  = await User.findById(id)
+    await User.findByIdAndUpdate(query, update, option);
+    const user = await User.findById(id);
     return res.status(200).json(user);
+  } catch (error) {
+    return res.status(500).json(error.message);
+  }
+};
+
+export const addComment = async (req, res) => {
+  // console.log(req.params.id);
+
+  const { id } = req.params;
+  const data = req.body;
+  const user = req.user;
+  const { comment } = data;
+  const post = await BlogModel.find({ _id: id });
+  const users = await User.find({ _id: user.id });
+  const { img } = post[0].content;
+  const singleUser = users[0];
+
+
+  try {
+    const newcomment = new CommentModel({
+      userId: user.id,
+      userImg:singleUser.photoURL,
+      postId: id,
+      PostImg: img,
+      text: comment,
+      Username: singleUser.name,
+    });
+    console.log({newcomment})
+    await newcomment.save();
+    return res.status(200).json(newcomment);
   } catch (error) {
     return res.status(500).json(error.message);
   }
