@@ -31,17 +31,17 @@ const Nav = ({ account, isAdmin }) => {
 
     const [isDropDownOpen, setIsDropDownOpen] = useState(false)
 
-
+ 
 
     let Links = [
 
-        { name: "Entertainment", link: "intertainment" },
-        { name: "Finance", link: "finance" },
-        { name: "Health", link: "health" },
-        { name: "International", link: "international" },
-        { name: "National", link: "national" },
-        { name: "Politics", link: "politics" },
-        { name: "Technology", link: "technology" },
+        { name: "Entertainment", link: "Entertainment" },
+        { name: "Finance", link: "Finance" },
+        { name: "Health", link: "Health" },
+        { name: "International", link: "International" },
+        { name: "National", link: "National" },
+        { name: "Politics", link: "Politics" },
+        { name: "Technology", link: "Technology" },
 
 
     ];

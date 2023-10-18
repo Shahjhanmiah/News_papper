@@ -1,5 +1,5 @@
 import './App.css'
-import { useContext, useEffect, useState } from 'react'
+import {  useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import { base_url } from '../base_url/Base_url'
 import { MainContext } from './components/context/PostContext'
@@ -21,6 +21,7 @@ import Addnewpost from './components/admin/posts/Addnewpost'
 import EditPost from './components/admin/posts/EditPost'
 import EditUser from './components/admin/users/EditUser'
 import Comments from './components/admin/comment/Comments'
+import Profile from './components/profile/profile'
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
   const { account,posts } = useContext(MainContext)
   
   const [isAdmin, setIsAdmin] = useState(true)
+  const [LoggedIn, setLoggedIn] = useState(false)
   const [isloading , setIsloading] = useState(false)
 
   useEffect(() => {
@@ -43,6 +45,12 @@ function App() {
         setIsAdmin(false)
     }
     Loading();
+
+    if(account){
+      setLoggedIn(true);
+    }else{
+      setLoggedIn(false);
+    }
   }, [account])
 
 const Loading = () => {
@@ -72,6 +80,7 @@ const Loading = () => {
           <Route path='/edit/user/:id' element={isAdmin ? <EditUser  account={account} /> : <Navigate to={'/error'}/>  } />  
           <Route path='/comments' element={isAdmin ? <Comments  account={account} /> : <Navigate to={'/error'}/>  } />  
           <Route path='/comments/:type' element={isAdmin ? <Comments  account={account} /> : <Navigate to={'/error'}/>  } />  
+          <Route path='/profile' element={LoggedIn ? <Profile account={account} /> : <Navigate to={'/error'}/>  } />  
         </Routes>
         <Footer />
       </Router> : <Loader />}
