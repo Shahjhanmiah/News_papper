@@ -4,6 +4,7 @@ import { MainContext } from '../../context/PostContext'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { base_url } from '../../../../base_url/Base_url'
+import Swal from 'sweetalert2'
 
 const Posts = ({ account }) => {
 
@@ -16,6 +17,11 @@ useEffect(()=> {
     const handleDelete = async(id) => {
         await axios.delete(`${base_url}/deleteblog/${id}`,{withCredentials:true}).then(res=> {
            setPosts(res.data)
+           Swal.fire(
+            'Deleted!',
+            'Your Post has been deleted.',
+            'success'
+        )
         }).catch(err => console.log(err) );
     }
 

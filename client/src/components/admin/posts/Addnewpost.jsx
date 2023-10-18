@@ -6,6 +6,7 @@ import { base_url } from '../../../../base_url/Base_url';
 import { FaXmark } from "react-icons/fa6";
 import { useNavigate, useParams } from 'react-router-dom';
 import { MainContext } from '../../context/PostContext';
+import Swal from 'sweetalert2'
 
 const toolbarOptions = [
     [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
@@ -35,7 +36,7 @@ const quillStyle = {
 
 const Addnewpost = () => {
 
-const { setPosts} = useContext(MainContext)
+    const { setPosts } = useContext(MainContext)
     const [title, setTitle] = useState('')
 
     const [tagsInput, setTagsInput] = useState('');
@@ -52,8 +53,8 @@ const { setPosts} = useContext(MainContext)
         "International",
         "National",
         "Politics",
-        "Technology", 
-      ];
+        "Technology",
+    ];
     const [category, setCategory] = useState('')
 
     const navigate = useNavigate();
@@ -62,46 +63,46 @@ const { setPosts} = useContext(MainContext)
 
 
 
-    
-        const handleAddItem = () => {
-    
-            if (tagsInput) {
-                setTags([...tags, tagsInput]);
-                setTagsInput(''); // Clear the input field
-            }
-        };
-    
-        const handleRemoveTags = (i) => {
-            const newData = tags.filter((_, index) => index !== i);
-            setTags(newData);
+
+    const handleAddItem = () => {
+
+        if (tagsInput) {
+            setTags([...tags, tagsInput]);
+            setTagsInput(''); // Clear the input field
         }
+    };
+
+    const handleRemoveTags = (i) => {
+        const newData = tags.filter((_, index) => index !== i);
+        setTags(newData);
+    }
 
 
-    const handleFileChange = async(e) => {
+    const handleFileChange = async (e) => {
         console.log(e.target.files[0])
         const formData = new FormData();
         formData.append('image', e.target.files[0]);
-        const Api = "https://api.imgbb.com/1/upload?expiration=600&key=7dfd97eb382b65ec8ec1a88ce98dfab1"; 
+        const Api = "https://api.imgbb.com/1/upload?expiration=600&key=7dfd97eb382b65ec8ec1a88ce98dfab1";
         axios.post(Api, formData)
-          .then((res) => {
-            const url = res.data.data.url;  
-            setImgUrl(url);
-            console.log({imgUrl})
-       
-          })  
-          .catch((err) => {
-            console.log(err);  
-          });  
-       
-    };      
+            .then((res) => {
+                const url = res.data.data.url;
+                setImgUrl(url);
+                console.log({ imgUrl })
+
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+
+    };
 
 
 
 
 
-    
 
-   
+
+
 
     const handleSubmit = async (e) => {
         console.log('clicked')
@@ -131,6 +132,12 @@ const { setPosts} = useContext(MainContext)
                         navigate('/posts')
 
                 }
+                setPosts(res.data)
+                Swal.fire(
+                    'AddnewPost!',
+                    'Your Post has a SuccessFullay.',
+                    'success'
+                )
 
             }).catch(err => {
                 console.log(err);
@@ -212,7 +219,7 @@ const { setPosts} = useContext(MainContext)
                     </form>
 
                 </div>
-               
+
             </div>
         </div>
     )

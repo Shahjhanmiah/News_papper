@@ -4,6 +4,7 @@ import User from './User'
 import { useParams, useSearchParams } from 'react-router-dom'
 import axios from 'axios'
 import { base_url } from '../../../../base_url/Base_url'
+import Swal from 'sweetalert2'
 
 const Users = () => {
     const params = useParams()
@@ -31,6 +32,12 @@ console.log({user})
             }else{
                 setUser([])
             }
+            Swal.fire(
+                'AllUser!',
+                ' Alluser  delate has a Successfullay .',
+                'success'
+            )
+            
         }).catch(err => {
             console.log(err);
         })
