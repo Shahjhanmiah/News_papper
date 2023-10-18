@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { base_url } from '../../../../base_url/Base_url';
+import Swal from 'sweetalert2'
 
 const EditUser = () => {
 
@@ -42,6 +43,11 @@ const EditUser = () => {
                      id = res.data.role
 
                     navigate(`/users/${id}`)
+                    Swal.fire(
+                        'AddUserEdite!',
+                        'Your AddUser Edite has a SuccessFullay.',
+                        'success'
+                    )
             }
 
         }).catch(err => {
