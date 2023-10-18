@@ -54,12 +54,13 @@ passport.use(
         user.save();
         return cb(null, user);
       }
-    }
+   nul }
   )
 );
 
+
 passport.serializeUser((user, done) => {
-  done(null, user.id);
+  done(null, user);
 });
 
 passport.deserializeUser(async (id, done) => {

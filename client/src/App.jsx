@@ -20,6 +20,7 @@ import Posts from './components/admin/posts/Posts'
 import Addnewpost from './components/admin/posts/Addnewpost'
 import EditPost from './components/admin/posts/EditPost'
 import EditUser from './components/admin/users/EditUser'
+import Comments from './components/admin/comment/Comments'
 
 
 function App() {
@@ -60,14 +61,17 @@ const Loading = () => {
           <Route path='/signup' element={Object.keys(account).length !== 0 ? <Navigate to={'/'}/> : <Register />} />
           <Route path='/signin' element={Object.keys(account).length !== 0 ? <Navigate to={'/'}/> : <Login /> } />
           <Route path='/post/:id' element={<PostPage />} />
-          <Route path='/dashboard' element={isAdmin ? <Dashboard  account={account} /> : <Navigate to={'/error'}/>  } />
           <Route path='*' element={<Error />} />
+          <Route path='/dashboard' element={isAdmin ? <Dashboard  account={account} /> : <Navigate to={'/error'}/>  } />
           <Route path='/users/:type' element={isAdmin ? <Users  account={account} /> : <Navigate to={'/error'}/> } />
           <Route path='/addnewuser' element={isAdmin ? <Users  account={account} /> : <Navigate to={'/error'}/>  } />  
           <Route path='/posts' element={isAdmin ? <Posts  account={account} posts={posts} /> : <Navigate to={'/error'}/>  } />  
           <Route path='/addnewpost' element={isAdmin ? <Addnewpost  account={account} /> : <Navigate to={'/error'}/>  } />  
           <Route path='/edit/:id' element={isAdmin ? <EditPost  account={account} /> : <Navigate to={'/error'}/>  } />  
           <Route path='/edit/user/:id' element={isAdmin ? <EditUser  account={account} /> : <Navigate to={'/error'}/>  } />  
+          <Route path='/edit/user/:id' element={isAdmin ? <EditUser  account={account} /> : <Navigate to={'/error'}/>  } />  
+          <Route path='/comments' element={isAdmin ? <Comments  account={account} /> : <Navigate to={'/error'}/>  } />  
+          <Route path='/comments/:type' element={isAdmin ? <Comments  account={account} /> : <Navigate to={'/error'}/>  } />  
         </Routes>
         <Footer />
       </Router> : <Loader />}
