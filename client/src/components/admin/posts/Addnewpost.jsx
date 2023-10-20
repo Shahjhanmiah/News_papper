@@ -82,9 +82,10 @@ const Addnewpost = () => {
         console.log(e.target.files[0])
         const formData = new FormData();
         formData.append('image', e.target.files[0]);
-        const Api = "https://api.imgbb.com/1/upload?expiration=600&key=7dfd97eb382b65ec8ec1a88ce98dfab1";
+        const Api = "https://api.imgbb.com/1/upload?expiration=15858432000&key=7dfd97eb382b65ec8ec1a88ce98dfab1";
         axios.post(Api, formData)
             .then((res) => {
+                console.log(res)
                 const url = res.data.data.url;
                 setImgUrl(url);
                 console.log({ imgUrl })
@@ -97,6 +98,7 @@ const Addnewpost = () => {
     };
 
 
+    console.log({imgUrl});
 
 
 

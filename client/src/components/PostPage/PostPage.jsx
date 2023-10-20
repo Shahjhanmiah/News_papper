@@ -16,6 +16,8 @@ const PostPage = () => {
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
 
+  const Description = <Markdown rehypePlugins={rehypeRaw}>{singlePost?.content?.desc}</Markdown>
+
 
   const onChangeHandler = (e) => {
     setComment(e.target.value);
@@ -96,7 +98,7 @@ const PostPage = () => {
           </div>
           <div className='flex flex-col items-start justify-start gap-3 my-5 px-5'>
             <img src={singlePost?.content?.img} alt="PostImg" />
-            <Markdown rehypePlugins={rehypeRaw}>{singlePost?.content?.desc}</Markdown>
+            {Description}
           </div>
         </div>
         <hr />

@@ -116,9 +116,12 @@ const Nav = ({ account, isAdmin }) => {
                             <div className='cursor-pointer' onClick={() => setIsDropDownOpen(!isDropDownOpen)}>
 
                                 {account?.photoURL ?
-                                    <img style={{ height: '45px' }} className=' rounded-full mx-2' src={account?.photoURL}></img>
-                                    : <span className='mx-2 text-white bg-blue-600 hover:bg-blue-800 p-4 rounded-full font-medium'>{ProfileText}</span>
-
+                                    <div className='h-12 w-12'>
+                                        <img  className=' rounded-full mx-2 w-full h-full' src={account?.photoURL}></img>
+                                    </div>
+                                    : <div className='h-12 w-12'> 
+                                    <img className=' rounded-full mx-2' src='https://i.ibb.co/jwgThNk/avater-1.png'></img>
+                                    </div>
                                 }
                             </div>
                         </li>

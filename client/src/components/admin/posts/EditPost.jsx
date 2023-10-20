@@ -50,8 +50,8 @@ const EditPost = () => {
         "International",
         "National",
         "Politics",
-        "Technology", 
-      ];
+        "Technology",
+    ];
     const [category, setCategory] = useState('')
 
     const navigate = useNavigate();
@@ -61,27 +61,30 @@ const EditPost = () => {
     useEffect(() => {
         findPost();
     }, [])
-    
+
 
     useEffect(() => {
-       console.log({imgUrl})
+        console.log({ imgUrl })
     }, [imgUrl])
 
 
 
 
-   
+
 
 
     const handleFileChange = async (e) => {
         console.log(e.target.files[0])
         const formData = new FormData();
         formData.append('image', e.target.files[0]);
-        const Api = "https://api.imgbb.com/1/upload?expiration=600&key=7dfd97eb382b65ec8ec1a88ce98dfab1";
-        axios.post(Api, formData)
-            .then((res) => {
+
+
+
+        const Api = "https://api.imgbb.com/1/upload?expiration=63072000&key=7dfd97eb382b65ec8ec1a88ce98dfab1";
+        axios.post(Api, formData).then((res) => {
+                console.log(res)
                 const url = res.data.data.url;
-                console.log({url})
+                console.log({ url })
                 setImgUrl(url);
                 console.log({ imgUrl })
 
@@ -110,7 +113,7 @@ const EditPost = () => {
         setTags(newData);
     }
 
-    
+
 
 
 
@@ -167,7 +170,7 @@ const EditPost = () => {
     }
 
 
-    
+
 
 
 
@@ -200,7 +203,7 @@ const EditPost = () => {
                                 <span className="label-text font-medium text-lg">Image</span>
                             </label>
 
-                            {imgUrl && <img src={`${imgUrl}`}  />}
+                            {imgUrl && <img src={`${imgUrl}`} />}
 
                             <input type="file" name='image' id='image' className="focus:outline-blue-600 file-input file-input-bordered w-full " onChange={handleFileChange} />
 

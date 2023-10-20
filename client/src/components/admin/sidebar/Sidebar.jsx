@@ -16,7 +16,7 @@ const Sidebar = () => {
 
   const { account, setAccount } = useContext(MainContext)
 
-
+console.log(account.name)
   return (
 
     <>
@@ -26,8 +26,9 @@ const Sidebar = () => {
 
       <div className='menu mt-3 text-white ' >
         <div className='flex flex-col items-center justify-center text-center mx-auto font-medium bg-blue-600 w-full rounded py-2 mb-3'>
-        {account?.photoURL ?  <img className='w-10 h-10 rounded-full' src={account.photoURL} alt="" /> : <span className=' text-white text-2xl rounded-full font-medium cursor-pointer w-full' >{account.name}</span>
-        }
+        {account?.photoURL && <img className='w-10 h-10 rounded-full' src={account.photoURL} alt="" /> }
+         <span className=' text-white text-2xl rounded-full font-medium cursor-pointer w-full' >{account.name}</span>
+        
         <span className='text-xl text-warning'>{account?.role}</span>
         </div>
         
@@ -44,10 +45,9 @@ const Sidebar = () => {
           <div className="dropdown w-[100%] sm:w-[100%] md:w-[100%] xl:w-[100%] lg:w-[100%] ">
             <button className="dropbtn font-medium bg-white p-2 text-lg text-black mb-2 br-5 rounded-md "> <span >  <i className='flex icon-div '> <FaUserAlt />  Users </i> </span>  <span  > <AiOutlineCaretDown /> </span> </button>
             <div className="dropdown-content">
-              <Link to={'/users/admin'}>Admin</Link>
-              <Link to={'/users/moderator'}>Moderator</Link>
+              <Link to={'/users/admin'}>Admins</Link>
+              <Link to={'/users/moderator'}>Moderators</Link>
               <Link to={'/users/user'}>Users</Link>
-              <Link to={'/addnewuser'}>Add New Users</Link>
             </div>
           </div>
           <div className="dropdown w-[100%] sm:w-[100%] md:w-[100%] xl:w-[100%] lg:w-[100%] ">
@@ -60,10 +60,6 @@ const Sidebar = () => {
 
           <div className="dropdown w-[100%] sm:w-[100%] md:w-[100%] xl:w-[100%] lg:w-[100%] ">
             <Link to={'/notifications'} className="dropbtn font-medium bg-white p-2 text-lg text-black mb-2 br-5 rounded-md "> <span >  <i className='flex icon-div '> <AiFillBell />  Notifications </i> </span> </Link>
-
-          </div>
-          <div className="dropdown w-[100%] sm:w-[100%] md:w-[100%] xl:w-[100%] lg:w-[100%] ">
-            <Link to={'/profile'} className="dropbtn font-medium bg-white p-2 text-lg text-black mb-2 br-5 rounded-md "> <span >  <i className='flex icon-div '> <BiSolidUserCircle />  Profile </i> </span> </Link>
 
           </div>
         </div>

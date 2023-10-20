@@ -1,5 +1,5 @@
 import express from 'express';
-import { Homepage,addPost,getPosts,getSinglePost,register,Login,getUser,SignOut,AuthFailed,getAllUser,getSpecificUsers,getCategories,deleteBlog,editPost,deleteUser,getSingleUser,editUser,addComment,getComments,approveComment,getPostComments,deleteComment} from '../controllers/pages-controllers.js';
+import { Homepage,addPost,getPosts,getSinglePost,register,Login,getUser,SignOut,AuthFailed,getAllUser,getSpecificUsers,getCategories,deleteBlog,editPost,deleteUser,getSingleUser,editUser,addComment,getComments,approveComment,getPostComments,deleteComment,updateUser} from '../controllers/pages-controllers.js';
 import passport from 'passport';
 import { checkAuth } from './passport.js';
 const CLIENT_URL  = 'http://localhost:5173/'
@@ -24,6 +24,7 @@ router.get('/comments/:type',getComments )
 router.get('/approve/comment/:id',approveComment )            
 // router.post('/addpost',addPost)
 router.post('/register',register)
+router.post('/update-user',updateUser)
 router.post('/createblog',addPost)
 router.post('/:id/comment/add',addComment)
 router.post('/updateblog/:id',editPost)

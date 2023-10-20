@@ -9,7 +9,6 @@ const commentSchema = new mongoose.Schema({
     userImg: {
       type: String,
       ref: 'User', 
-      required: true,
     },
     Username: {
       type: String,

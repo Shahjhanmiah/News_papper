@@ -61,7 +61,7 @@ console.log(users)
           <div className=' p-5 bg-white'>
             <div className='post-icon'> <FaSign /> </div>
             <h1 className='text-3xl font-bold '>All Post </h1>
-            <p className='text-lg font-bold '> Total : {posts.length - 1} +</p>
+            <p className='text-lg font-bold '> Total : {posts.length} +</p>
           </div>
           <div className=' p-5 bg-white'>
             <div className='post-icon'> <FaUserAlt /></div>

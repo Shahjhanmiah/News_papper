@@ -44,13 +44,14 @@ function App() {
       default:
         setIsAdmin(false)
     }
-    Loading();
-
     if(account){
       setLoggedIn(true);
     }else{
       setLoggedIn(false);
     }
+    Loading();
+
+   
   }, [account])
 
 const Loading = () => {
@@ -58,7 +59,7 @@ const Loading = () => {
     setIsloading(true)
   }, 3000);
 }
-
+console.log({LoggedIn})
   return (
     <div className='w-[90%] m-auto'>
       {isloading ? <Router>

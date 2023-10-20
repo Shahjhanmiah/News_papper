@@ -120,6 +120,7 @@ export const register = async (req, res) => {
           email,
           password: hashedPassword,
           cpassword: HashedCpassword,
+          photoURL:'https://i.ibb.co/jwgThNk/avater-1.png'
         });
         await newUser.save();
         return res
@@ -271,6 +272,23 @@ export const editUser = async (req, res) => {
   }
 };
 
+
+export const updateUser = async (req, res) =>   {
+  const { name, photoURL , userId,id } = req.body;
+
+  const query = {_id:id}
+  const update = { name:name , photoURL:photoURL  };
+  const option = { new: true };
+
+  try {
+    await User.findByIdAndUpdate(query, update, option);
+    const user = await User.findById(id);
+    return res.status(200).json(user);
+  } catch (error) {
+    return res.status(500).json(error.message);
+  }
+};
+
 export const addComment = async (req, res) => {
   // console.log(req.params.id);
 
@@ -278,16 +296,17 @@ export const addComment = async (req, res) => {
   const data = req.body;
   const user = req.user;
   const { comment } = data;
+  console.log({user})
   const post = await BlogModel.find({ _id: id });
   const users = await User.find({ _id: user.id });
   const { img } = post[0].content;
   const singleUser = users[0];
-
+  const userimg = singleUser.photoURL ? singleUser.photoURL : 'https://i.ibb.co/jwgThNk/avater-1.png';
 
   try {
     const newcomment = new CommentModel({
       userId: user.id,
-      userImg:singleUser.photoURL,
+      userImg:userimg,
       postId: id,
       PostImg: img,
       text: comment,
@@ -297,6 +316,7 @@ export const addComment = async (req, res) => {
     await newcomment.save();
     return res.status(200).json(newcomment);
   } catch (error) {
+    console.log(error)
     return res.status(500).json(error.message);
   }
 };

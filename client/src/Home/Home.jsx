@@ -12,13 +12,18 @@ import axios from 'axios'
 import Social from '../components/social/Social';
 import National from '../components/national/National';
 import { useContext, useEffect } from 'react';
+import Markdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
 
 
 const Home = ({posts}) => {
 
     
+
+    
     const latestPost = posts[0]
-    const headingSubtitle = latestPost?.content?.desc?.substring(0, 100) + '[...]'
+    const headingSubtitle = <Markdown rehypePlugins={rehypeRaw}>{latestPost?.content?.desc?.substring(0, 100)}</Markdown>
+   
 
 
     return (
