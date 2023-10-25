@@ -36,7 +36,6 @@ const Profile = () => {
     const updateUser = {
       id,
       name,
-      userId: email ? email : gogleID,
       photoURL: updateImg ? updateImg : imgUrl
     }
     console.log(updateUser)
@@ -57,7 +56,6 @@ const Profile = () => {
   }
 
   const handleImgChange = async (e) => {
-
     console.log(e.target.files[0])
     const formData = new FormData();
     formData.append('image', e.target.files[0]);

@@ -32,7 +32,6 @@ const Home = ({posts}) => {
             <BannerAd/>
             <AllCat news={posts}/>
             <Social news={posts}/>
-            <National news={posts} />
             <Allnews  />
 
 

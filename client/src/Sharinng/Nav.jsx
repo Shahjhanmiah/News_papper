@@ -7,6 +7,7 @@ import { useContext, useEffect, useState } from 'react';
 import { base_url } from '../../base_url/Base_url';
 import axios from 'axios';
 import Swal from 'sweetalert2'
+import { FaSearch } from 'react-icons/fa'
 
 
 const Nav = ({ account, isAdmin }) => {
@@ -31,7 +32,7 @@ const Nav = ({ account, isAdmin }) => {
 
     const [isDropDownOpen, setIsDropDownOpen] = useState(false)
 
- 
+
 
     let Links = [
 
@@ -117,10 +118,10 @@ const Nav = ({ account, isAdmin }) => {
 
                                 {account?.photoURL ?
                                     <div className='h-12 w-12'>
-                                        <img  className=' rounded-full mx-2 w-full h-full' src={account?.photoURL}></img>
+                                        <img className=' rounded-full mx-2 w-full h-full' src={account?.photoURL}></img>
                                     </div>
-                                    : <div className='h-12 w-12'> 
-                                    <img className=' rounded-full mx-2' src='https://i.ibb.co/jwgThNk/avater-1.png'></img>
+                                    : <div className='h-12 w-12'>
+                                        <img className=' rounded-full mx-2' src='https://i.ibb.co/jwgThNk/avater-1.png'></img>
                                     </div>
                                 }
                             </div>
@@ -145,6 +146,22 @@ const Nav = ({ account, isAdmin }) => {
                 </ul>
                 {/* button */}
             </div>
+            <div className='w-full h-16 bg-blue-700 sticky top-0 left-0 z-[-1]  flex items-center justify-center'>
+                <form className='flex justify-center items-center  gap-5 w-full mx-auto '>
+
+                   <div className='w-full  flex items-center justify-center sm:mx-16 mx-4 lg:gap-10 gap-4'>
+                   <div className='lg:w-2/5  w-full '>
+                        <input type="text" className='h-full w-full rounded-lg px-2 py-3' />
+                    </div>
+
+                    <div className='h-full '>
+                        <button type='submit' className='text-2xl text-center text-white font-bold'><FaSearch /></button>
+                    </div>
+                   </div>
+                </form>
+
+            </div>
+
         </div>
     );
 };

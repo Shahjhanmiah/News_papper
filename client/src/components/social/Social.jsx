@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const Social = () => {
      const {posts} = useContext(MainContext)
 
-     const social = posts.filter(item => item?.category === 'social' )
+     const social = posts.filter(item => item?.category === 'Politics' )
     
     return (
     

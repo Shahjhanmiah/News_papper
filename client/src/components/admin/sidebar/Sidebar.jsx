@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import DashboardLogo from '../../../assets/hasan/Logo.png'
 import { FaThLarge, FaUserAlt, FaPuzzlePiece, FaSign, FaComments, FaSignOutAlt } from "react-icons/fa";
 import { AiOutlineCaretDown, AiFillBell } from "react-icons/ai";
@@ -15,7 +15,22 @@ import { MainContext } from '../../context/PostContext';
 const Sidebar = () => {
 
   const { account, setAccount } = useContext(MainContext)
+  const [ approvedComments,setAppprovedComments ] = useState([])
+  useEffect(() => {
+    getApproveComments();
+  },[])
 
+  const getApproveComments = async () => {
+    await axios.get(`${base_url}/getcomments/approved`, { withCredentials: true }).then(res => {
+      console.log(res.data)
+      setAppprovedComments(res.data);
+    }).catch(err => {
+      console.log(err);
+    })
+  }
+
+  
+  console.log({approvedComments})
 console.log(account.name)
   return (
 
@@ -53,7 +68,7 @@ console.log(account.name)
           <div className="dropdown w-[100%] sm:w-[100%] md:w-[100%] xl:w-[100%] lg:w-[100%] ">
             <button className="dropbtn font-medium bg-white p-2 text-lg text-black mb-2 br-5 rounded-md "> <span >  <i className='flex icon-div '> <FaComments />  Comments </i> </span>  <span  > <AiOutlineCaretDown /> </span> </button>
             <div className="dropdown-content">
-              <Link to={'/comments/approved'}>Approved Comments</Link>
+              <Link to={'/comments/approved'}>Approved Comments <span className='bg-red-600 p-2 text-white text-sm'>{approvedComments.length}</span></Link>
               <Link to={'/comments/unapproved'}>Unapproved Comments</Link>
             </div>
           </div>

@@ -11,7 +11,6 @@ export const Homepage = (req, res) => {};
 
 export const addPost = async (req, res) => {
   const { title, content, category, tags } = req.body;
-  console.log({ content });
   const comma = ", ";
   const TagString = tags.join(comma);
   const author = req.user.name;
@@ -37,8 +36,6 @@ export const addPost = async (req, res) => {
 export const getPosts = async (req, res) => {
   try {
     const AllPost = await BlogModel.find({}).sort("-updatedAt");
-    console.log(AllPost);
-
     return res.status(200).json(AllPost);
   } catch (error) {
     console.log(error);
@@ -68,12 +65,12 @@ export const getSingleUser = async (req, res) => {
 };
 export const getComments = async (req, res) => {
   const { type } = req.params;
-
+console.log({type})
   try {
     const comments = await CommentModel.find({ isApproved: type });
-    console.log({ comments });
     return res.status(200).json(comments);
   } catch (error) {
+    console.log(error)
     return res.status(500).json({ message: "error while getting comments" });
   }
 };
@@ -84,6 +81,7 @@ export const getPostComments = async (req, res) => {
     const comments = await CommentModel.find({ postId: id, isApproved:'approved' });
     return res.status(200).json(comments);
   } catch (error) {
+    
     return res.status(500).json({ message: "error while getting comments" });
   }
 };
@@ -134,7 +132,6 @@ export const register = async (req, res) => {
 };
 
 export const Login = async (req, res) => {
-  console.log(req.session.passport.user);
   try {
     return res.status(200).json(req.session.passport.user);
   } catch (error) {
@@ -143,10 +140,8 @@ export const Login = async (req, res) => {
 };
 
 export const getUser = async (req, res) => {
-  console.log("getuser called");
+  console.log('getuser called')
   const user = req.user;
-  console.log({ user });
-
   try {
     return res.status(200).json(user);
   } catch (error) {
@@ -157,7 +152,6 @@ export const getUser = async (req, res) => {
 export const getSpecificUsers = async (req, res) => {
   console.log("alluser called");
   const userType = req.params.type;
-  console.log(userType);
   try {
     const allUser = await User.find({ role: userType });
     return res.status(200).json(allUser);
@@ -170,7 +164,6 @@ export const getCategories = async (req, res) => {
   console.log("get categories called");
   try {
     const allCategory = await BlogModel.distinct("category");
-    console.log(allCategory);
     return res.status(200).json(allCategory);
   } catch (error) {
     return res.status(500).json({ message: "Something went wrong" });
@@ -178,7 +171,6 @@ export const getCategories = async (req, res) => {
 };
 
 export const getAllUser = async (req, res) => {
-  console.log("all user called");
   try {
     const allUser = await User.find({});
     return res.status(200).json(allUser);
@@ -202,7 +194,6 @@ export const AuthFailed = async (req, res) => {
 };
 
 export const deleteBlog = async (req, res) => {
-  console.log(req.params.id);
   try {
     await BlogModel.findByIdAndRemove(req.params.id);
     const Blog = await BlogModel.find().sort("-updatedAt");
@@ -213,7 +204,6 @@ export const deleteBlog = async (req, res) => {
 };
 
 export const deleteUser = async (req, res) => {
-  console.log(req.params.id);
   try {
     await User.findByIdAndRemove(req.params.id);
     const Users = await User.find();
@@ -224,7 +214,6 @@ export const deleteUser = async (req, res) => {
 };
 
 export const deleteComment = async (req, res) => {
-  console.log(req.params.id);
   try {
     await CommentModel.findByIdAndRemove(req.params.id);
     const comments = await CommentModel.find();
@@ -235,11 +224,10 @@ export const deleteComment = async (req, res) => {
 };
 
 export const editPost = async (req, res) => {
-  console.log(req.params.id);
   const { id } = req.params;
   const { title, content, category, tags } = req.body;
   const TagString = tags.join(", ");
-  const author = req.user.name;
+  const author = req.session.passport.user.name;
 
   const query = { _id: id };
   const update = { title, content, category, tags: TagString, author: author };
@@ -255,7 +243,6 @@ export const editPost = async (req, res) => {
 };
 
 export const editUser = async (req, res) => {
-  console.log(req.params.id);
   const { id } = req.params;
   const { name, role } = req.body;
 
@@ -274,7 +261,7 @@ export const editUser = async (req, res) => {
 
 
 export const updateUser = async (req, res) =>   {
-  const { name, photoURL , userId,id } = req.body;
+  const { name, photoURL ,id } = req.body;
 
   const query = {_id:id}
   const update = { name:name , photoURL:photoURL  };
